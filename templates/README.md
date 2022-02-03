@@ -1,6 +1,6 @@
 # Piral Template Packages
 
-Piral is developed as a monorepo.
+The set of Piral templates are developed in a monorepo.
 
 ## Available Template Packages
 
