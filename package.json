@@ -10,7 +10,7 @@
     "build": "lerna run build",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --project tsconfig.json",
     "prettify": "prettier --config prettier.config.js --write \"src/**/*.{ts,tsx}\"",
-    "test": "jest --forceExit",
+    "test": "jest --forceExit --passWithNoTests",
     "prepublish": "yarn build",
     "release": "lerna publish",
     "ci:version": "node tools/changelog-version.js",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "jest": "^25.0.0",
     "jest-cli": "^25.0.0",
-    "lerna": "^3.10.7",
+    "lerna": "^4.0.0",
     "prettier": "^2.1.1",
     "ts-jest": "^25.0.0",
     "tslint": "^5.12.1",
