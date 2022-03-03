@@ -1,0 +1,12 @@
+import { startLoadingPilets } from "piral-base";
+
+startLoadingPilets({
+  createApi(meta) {
+    return {
+      meta,
+    };
+  },
+  fetchPilets() {
+    return Promise.resolve([]);
+  },
+});

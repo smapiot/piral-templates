@@ -6,14 +6,26 @@ export interface TemplateArgs {
   packageName?: string;
   mocks?: string;
   src?: string;
+  title?: string;
+  plugins?: Array<string>;
 }
 
 export default async function (root: string, args: TemplateArgs) {
-  const { language = 'ts', packageName = 'piral', mocks = 'mocks', src = 'src' } = args;
+  const {
+    language = 'ts',
+    packageName = 'piral',
+    mocks = 'mocks',
+    src = 'src',
+    title = 'My Piral Instance',
+    plugins = [],
+    ...rest
+  } = args;
   const srcDir = relative(root, resolve(root, src));
   const mocksDir = relative(root, resolve(root, src, mocks));
   const files: Array<Promise<TemplateFile>> = [];
   const data = {
+    ...rest,
+    title,
     extension: getLanguageExtension(language, packageName !== 'piral-base'),
     src: srcDir,
   };

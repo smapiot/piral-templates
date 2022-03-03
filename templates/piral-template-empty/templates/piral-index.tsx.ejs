@@ -1,5 +1,11 @@
-import 'piral/polyfills';
 import * as React from 'react';
-import { renderInstance } from 'piral';
+import { render } from 'react-dom';
+import { createInstance, Piral } from 'piral';
 
-renderInstance();
+const instance = createInstance({
+  requestPilets() {
+    return Promise.resolve([]);
+  },
+});
+
+render(<Piral instance={instance} />, document.querySelector('#app'));
