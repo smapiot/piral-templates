@@ -1,99 +1,49 @@
-import { resolve, relative } from 'path';
-import { getFileFromTemplate, getLanguageExtension, TemplateFile } from './utils';
+import { resolve } from 'path';
+import { createPiralTemplateFactory } from '@smapiot/template-utils';
 
-export interface TemplateArgs {
-  language?: string;
-  packageName?: string;
-  mocks?: string;
-  src?: string;
-  title?: string;
-  plugins?: Array<string>;
-}
+const root = resolve(__dirname, '..');
 
-export default async function (root: string, args: TemplateArgs) {
-  const {
-    language = 'ts',
-    packageName = 'piral',
-    mocks = 'mocks',
-    src = 'src',
-    title = 'My Piral Instance',
-    plugins = [],
-    ...rest
-  } = args;
-  const srcDir = relative(root, resolve(root, src));
-  const mocksDir = relative(root, resolve(root, src, mocks));
-  const files: Array<Promise<TemplateFile>> = [];
-  const data = {
-    ...rest,
-    title,
-    extension: getLanguageExtension(language, packageName !== 'piral-base'),
-    src: srcDir,
-  };
-
-  switch (packageName) {
-    case 'piral-core': {
-      files.push(
-        getFileFromTemplate(srcDir, 'piral-core', 'index.html', data),
-        getFileFromTemplate(mocksDir, 'piral', 'backend.js', data),
-      );
-
-      switch (language) {
-        case 'js':
-          files.push(getFileFromTemplate(srcDir, 'piral-core', 'index.jsx', data));
-          break;
-        case 'ts':
-        default:
-          files.push(
-            getFileFromTemplate('.', 'piral', 'tsconfig.json', data),
-            getFileFromTemplate(srcDir, 'piral-core', 'index.tsx', data),
-          );
-          break;
-      }
-      break;
-    }
-
-    case 'piral-base':
-      files.push(
-        getFileFromTemplate(srcDir, 'piral-base', 'index.html', data),
-        getFileFromTemplate(mocksDir, 'piral', 'backend.js', data),
-      );
-
-      switch (language) {
-        case 'js':
-          files.push(getFileFromTemplate(srcDir, 'piral-base', 'index.js', data));
-          break;
-        case 'ts':
-        default:
-          files.push(
-            getFileFromTemplate('.', 'piral', 'tsconfig.json', data),
-            getFileFromTemplate(srcDir, 'piral-base', 'index.ts', data),
-          );
-          break;
-      }
-      break;
-
-    case 'piral':
-    default: {
-      files.push(
-        getFileFromTemplate(srcDir, 'piral', 'index.html', data),
-        getFileFromTemplate(mocksDir, 'piral', 'backend.js', data),
-      );
-
-      switch (language) {
-        case 'js':
-          files.push(getFileFromTemplate(srcDir, 'piral', 'index.jsx', data));
-          break;
-        case 'ts':
-        default:
-          files.push(
-            getFileFromTemplate('.', 'piral', 'tsconfig.json', data),
-            getFileFromTemplate(srcDir, 'piral', 'index.tsx', data),
-          );
-          break;
-      }
-      break;
-    }
-  }
-
-  return await Promise.all(files);
-}
+export default createPiralTemplateFactory(root, [
+  {
+    name: 'core-index.html',
+    frameworks: ['piral-core', 'piral'],
+    target: '<src>/index.html',
+    languages: ['js', 'ts'],
+  },
+  {
+    name: 'base-index.html',
+    frameworks: ['piral-base'],
+    target: '<src>/index.html',
+    languages: ['js', 'ts'],
+  },
+  {
+    name: 'core-index.jsx',
+    frameworks: ['piral-core', 'piral'],
+    target: '<src>/index.jsx',
+    languages: ['js'],
+  },
+  {
+    name: 'core-index.tsx',
+    frameworks: ['piral-core', 'piral'],
+    target: '<src>/index.tsx',
+    languages: ['ts'],
+  },
+  {
+    name: 'base-index.js',
+    frameworks: ['piral-base'],
+    target: '<src>/index.js',
+    languages: ['js'],
+  },
+  {
+    name: 'base-index.ts',
+    frameworks: ['piral-base'],
+    target: '<src>/index.ts',
+    languages: ['ts'],
+  },
+  {
+    name: 'tsconfig.json',
+    frameworks: ['piral-base', 'piral-core', 'piral'],
+    target: '<root>/tsconfig.json',
+    languages: ['ts'],
+  },
+]);

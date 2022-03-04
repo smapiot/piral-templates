@@ -1,7 +1,7 @@
 {
-  "name": "@smapiot/pilet-template-empty",
+  "name": "@smapiot/template-utils",
   "version": "0.15.0",
-  "description": "Official scaffolding template for pilets: 'empty'.",
+  "description": "The utility library for the official Piral templates.",
   "keywords": [
     "piral-cli",
     "pilet",
@@ -13,8 +13,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=12.0",
-    "piral": "0.15.x"
+    "node": ">=12.0"
   },
   "author": "smapiot",
   "homepage": "https://piral.io",
@@ -23,8 +22,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "lib",
-    "src",
-    "templates"
+    "src"
   ],
   "funding": {
     "type": "github",
@@ -41,7 +39,10 @@
     "build": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
+  "devDependencies": {
+    "@types/ejs": "^2.6.3"
+  },
   "dependencies": {
-    "@smapiot/template-utils": "^0.15.0"
+    "ejs": "^2.6.2"
   }
 }

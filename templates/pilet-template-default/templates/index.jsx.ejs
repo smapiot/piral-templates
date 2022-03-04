@@ -1,0 +1,23 @@
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+
+const Page = React.lazy(() => import('./Page'));
+
+export function setup(app) {
+  app.registerPage('/page', Page);
+
+<% if (plugins.notification) { %>
+  app.showNotification('Hello from Piral!', {
+    autoClose: 2000,
+  });
+<% } %>
+<% if (plugins.menu) { %>
+  app.registerMenu(() => <Link to="/page">Page</Link>);
+<% } %>
+<% if (plugins.dashboard) { %>
+  app.registerTile(() => <div>Welcome to Piral!</div>, {
+    initialColumns: 2,
+    initialRows: 2,
+  });
+<% } %>
+}

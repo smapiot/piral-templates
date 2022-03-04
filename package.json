@@ -2,6 +2,7 @@
   "name": "piral-templates",
   "private": true,
   "workspaces": [
+    "packages/*",
     "templates/*"
   ],
   "scripts": {

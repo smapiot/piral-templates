@@ -1,34 +1,32 @@
-import { resolve, relative } from 'path';
-import { getFileFromTemplate, getPackageJsonWithSource, TemplateFile } from './utils';
+import { resolve } from 'path';
+import { createPiletTemplateFactory } from '@smapiot/template-utils';
 
-export interface TemplateArgs {
-  language?: string;
-  sourceName: string;
-  src?: string;
-}
+const root = resolve(__dirname, '..');
 
-export default async function (root: string, args: TemplateArgs) {
-  const { language = 'ts', src = 'src', sourceName } = args;
-  const srcDir = relative(root, resolve(root, src));
-  const files: Array<Promise<TemplateFile>> = [];
-  const data = {
-    sourceName,
-    src: srcDir,
-  };
-
-  switch (language) {
-    case 'js':
-      files.push(getFileFromTemplate(srcDir, 'index.jsx', data), getPackageJsonWithSource(srcDir, 'index.jsx'));
-      break;
-    case 'ts':
-    default:
-      files.push(
-        getFileFromTemplate('.', 'tsconfig.json', data),
-        getFileFromTemplate(srcDir, 'index.tsx', data),
-        getPackageJsonWithSource(srcDir, 'index.tsx'),
-      );
-      break;
-  }
-
-  return await Promise.all(files);
-}
+export default createPiletTemplateFactory(root, [
+  {
+    languages: ['js'],
+    name: 'index.jsx',
+    target: '<src>/index.jsx',
+  },
+  {
+    languages: ['js'],
+    name: 'Page.jsx',
+    target: '<src>/Page.jsx',
+  },
+  {
+    languages: ['ts'],
+    name: 'index.tsx',
+    target: '<src>/index.tsx',
+  },
+  {
+    languages: ['ts'],
+    name: 'Page.tsx',
+    target: '<src>/Page.tsx',
+  },
+  {
+    languages: ['ts'],
+    name: 'tsconfig.json',
+    target: '<root>/tsconfig.json',
+  },
+]);
