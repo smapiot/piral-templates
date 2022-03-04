@@ -30,13 +30,25 @@ export default createPiralTemplateFactory(root, [
   },
   {
     name: 'core-index.jsx',
-    frameworks: ['piral-core', 'piral'],
+    frameworks: ['piral-core'],
     target: '<src>/index.jsx',
     languages: ['js'],
   },
   {
     name: 'core-index.tsx',
-    frameworks: ['piral-core', 'piral'],
+    frameworks: ['piral-core'],
+    target: '<src>/index.tsx',
+    languages: ['ts'],
+  },
+  {
+    name: 'full-index.jsx',
+    frameworks: ['piral'],
+    target: '<src>/index.jsx',
+    languages: ['js'],
+  },
+  {
+    name: 'full-index.tsx',
+    frameworks: ['piral'],
     target: '<src>/index.tsx',
     languages: ['ts'],
   },

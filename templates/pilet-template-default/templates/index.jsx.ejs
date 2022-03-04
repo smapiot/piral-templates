@@ -6,7 +6,7 @@ const Page = React.lazy(() => import('./Page'));
 export function setup(app) {
   app.registerPage('/page', Page);
 
-<% if (plugins.notification) { %>
+<% if (plugins.notifications) { %>
   app.showNotification('Hello from Piral!', {
     autoClose: 2000,
   });

@@ -1,5 +1,6 @@
 import { relative, resolve } from 'path';
-import { getFileFromTemplate, getLanguageExtension } from './utils';
+import { getFileFromTemplate } from './template';
+import { getLanguageExtension, getPlugins } from './utils';
 import { PiralTemplateArgs, PiletTemplateArgs, TemplateFile, PiletTemplateSource, PiralTemplateSource } from './types';
 
 export function createPiletTemplateFactory(
@@ -10,7 +11,13 @@ export function createPiletTemplateFactory(
   const sourceDir = resolve(templateRoot, 'templates');
 
   return (root: string, args: PiletTemplateArgs): Promise<Array<TemplateFile>> => {
-    const { language = 'ts', src = 'src', sourceName, plugins = {}, ...rest } = { ...defaultArgs, ...args };
+    const {
+      language = 'ts',
+      sourceName,
+      src = 'src',
+      plugins = getPlugins(root, sourceName),
+      ...rest
+    } = { ...defaultArgs, ...args };
     const sources = allSources.filter((m) => m.languages.includes(language));
     const data = {
       ...rest,
