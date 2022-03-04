@@ -38,10 +38,11 @@
     "url": "https://github.com/smapiot/piral-templates/issues"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild src/index.ts --bundle --outfile=./lib/index.js --platform=node",
+    "check": "tsc --noEmit",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "dependencies": {
+  "devDependencies": {
     "@smapiot/template-utils": "^0.15.0"
   }
 }

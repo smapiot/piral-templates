@@ -15,6 +15,7 @@ export function createPiletTemplateFactory(
     const data = {
       ...rest,
       sourceName,
+      language,
       root: '.',
       src: relative(root, resolve(root, src)),
       plugins,
@@ -45,7 +46,10 @@ export function createPiralTemplateFactory(
     const data = {
       ...rest,
       title,
+      language,
+      plugins,
       root: '.',
+      packageName,
       extension: getLanguageExtension(language, packageName !== 'piral-base'),
       src: relative(root, resolve(root, src)),
       mocks: relative(root, resolve(root, src, mocks)),

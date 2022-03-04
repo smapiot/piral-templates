@@ -21,6 +21,7 @@
     "ci:release": "lerna publish $(yarn --silent ci:version) --yes --force-publish --message '[skip ci] publish %s'"
   },
   "devDependencies": {
+    "esbuild": "^0.14.25",
     "jest": "^25.0.0",
     "jest-cli": "^25.0.0",
     "lerna": "^4.0.0",
