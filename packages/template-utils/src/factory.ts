@@ -1,6 +1,6 @@
 import { relative, resolve } from 'path';
 import { getFileFromTemplate } from './template';
-import { getLanguageExtension, getPlugins } from './utils';
+import { getLanguageExtension, getPackageJsonWithSource, getPlugins } from './utils';
 import { PiralTemplateArgs, PiletTemplateArgs, TemplateFile, PiletTemplateSource, PiralTemplateSource } from './types';
 
 export function createPiletTemplateFactory(
@@ -21,14 +21,18 @@ export function createPiletTemplateFactory(
     const sources = allSources.filter((m) => m.languages.includes(language));
     const data = {
       ...rest,
-      sourceName,
       language,
-      root: '.',
-      src: relative(root, resolve(root, src)),
       plugins,
+      root: '.',
+      sourceName,
+      extension: getLanguageExtension(language),
+      src: relative(root, resolve(root, src)),
     };
 
-    return Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
+    return Promise.all([
+      ...sources.map((source) => getFileFromTemplate(sourceDir, source, data)),
+      getPackageJsonWithSource(data.src, `index${data.extension}`),
+    ]);
   };
 }
 

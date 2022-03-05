@@ -1,9 +1,14 @@
 import { posix, resolve, dirname } from 'path';
 import { readFileSync } from 'fs';
+import { log } from './log';
 
 export function getPackageJsonWithSource(targetDir: string, fileName: string) {
+  const path = posix.join(targetDir, fileName);
+
+  log('verbose', `Adding 'source' to package.json "${path}" ...`);
+
   return Promise.resolve({
-    content: Buffer.from(`{"source":${JSON.stringify(posix.join(targetDir, fileName))}}`, 'utf8'),
+    content: Buffer.from(`{"source":${JSON.stringify(path)}}`, 'utf8'),
     path: 'package.json',
   });
 }
@@ -11,36 +16,35 @@ export function getPackageJsonWithSource(targetDir: string, fileName: string) {
 export function getPlugins(root: string, sourceName: string) {
   const plugins: Record<string, boolean> = {};
 
-  console.log(`[template] Getting the plugins of "${sourceName}/package.json" ...`);
+  log('verbose', `Getting the plugins of "${sourceName}/package.json" ...`);
 
   try {
     const packageJsonPath = require.resolve(`${sourceName}/package.json`, {
       paths: [root],
     });
-    console.log(`[template] Found package JSON in "${packageJsonPath}"`);
+    log('verbose', `Found package JSON in "${packageJsonPath}"`);
     const sourcePath = dirname(packageJsonPath);
     const details = require(packageJsonPath);
-    console.log(`[template] Looking for types in "${details.types || details.typings}"`);
+    log('verbose', `Looking for types in "${details.types || details.typings}"`);
     const typingsPath = resolve(sourcePath, details.types || details.typings);
-    console.log(`[template] Reading file in "${typingsPath}"`);
+    log('verbose', `Reading file in "${typingsPath}"`);
     const typing = readFileSync(typingsPath, 'utf8');
-    const match = typing.match(/export interface PiletCustomApi extends (.*?) \{/g);
+    const match = /export interface PiletCustomApi extends (.*?) \{/g.exec(typing);
     const apis = match[1].split(', ');
-    console.log(`[template] Received APIs "${match[1]}"`);
+    log('info', `Found Piral instance plugins "${match[1]}"`);
 
     for (const api of apis) {
-      const pluginMatch = api.match(/^Pilet(.*)Api$/);
+      const pluginMatch = /^Pilet(.*)Api$/.exec(api);
 
       if (pluginMatch) {
-        console.log(`[template] Found API match "${pluginMatch[1]}"`);
         const name = pluginMatch[1].toLowerCase();
         plugins[name] = true;
       } else {
-        console.log(`[template] Could not match "${api}"`);
+        log('warn', `Could not find plugin for Pilet API "${api}"`);
       }
     }
   } catch (ex) {
-    console.error(`[template] Error when obtaining the plugins: ${ex}`)
+    log('error', `Error when obtaining the plugins: ${ex}`);
   }
 
   return plugins;

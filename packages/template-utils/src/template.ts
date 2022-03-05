@@ -1,15 +1,20 @@
 import { resolve } from 'path';
 import { renderFile } from 'ejs';
 import { TemplateFile, TemplateSource } from './types';
+import { log } from './log';
 
 function fillTemplate(sourceDir: string, name: string, data: any = {}) {
   const path = resolve(sourceDir, `${name}.ejs`);
 
+  log('verbose', `Filling template of "${path}" ...`);
+
   return new Promise<string>((resolve, reject) => {
     renderFile(path, data, (err, str) => {
       if (err) {
+        log('error', `Could not fill template at "${path}": ${err}`);
         reject(err);
       } else {
+        log('verbose', `Filled template at "${path}" ...`);
         resolve(str);
       }
     });
@@ -32,6 +37,8 @@ export async function getFileFromTemplate(
 
     return t;
   }, target);
+
+  log('verbose', `Return template "${name}" with path "${path}" (from "${target}")`);
 
   const content = await fillTemplate(sourceDir, name, data);
 
