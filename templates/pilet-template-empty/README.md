@@ -19,6 +19,18 @@ npm init pilet --template empty <other-options>
 npm init pilet -- --template empty <other-options>
 ```
 
+## Variables
+
+The following variables are available when scaffolding. They can be applied via the CLI flags, e.g.,
+
+```sh
+pilet new --template empty --vars.foo "bar" --vars.qxz "something else"
+```
+
+For this template we have:
+
+- **src**: Sets the directory of the source files. By default it's `<root>/src`.
+
 ## License
 
 Piral is released using the MIT license. For more information see the [license file](./LICENSE).

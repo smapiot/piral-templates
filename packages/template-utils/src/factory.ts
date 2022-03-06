@@ -1,5 +1,6 @@
-import { relative, resolve } from 'path';
+import { resolve } from 'path';
 import { getFileFromTemplate } from './template';
+import { configure, ExecutionDetails } from './parent';
 import { getLanguageExtension, getPackageJsonWithSource, getPlugins } from './utils';
 import { PiralTemplateArgs, PiletTemplateArgs, TemplateFile, PiletTemplateSource, PiralTemplateSource } from './types';
 
@@ -10,11 +11,13 @@ export function createPiletTemplateFactory(
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
-  return (root: string, args: PiletTemplateArgs): Promise<Array<TemplateFile>> => {
+  return (root: string, args: PiletTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
+    configure(templateRoot, details);
+
     const {
       language = 'ts',
       sourceName,
-      src = 'src',
+      src = '<root>/src',
       plugins = getPlugins(root, sourceName),
       ...rest
     } = { ...defaultArgs, ...args };
@@ -26,7 +29,7 @@ export function createPiletTemplateFactory(
       root: '.',
       sourceName,
       extension: getLanguageExtension(language),
-      src: relative(root, resolve(root, src)),
+      src,
     };
 
     return Promise.all([
@@ -43,12 +46,14 @@ export function createPiralTemplateFactory(
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
-  return async (root: string, args: PiralTemplateArgs): Promise<Array<TemplateFile>> => {
+  return async (root: string, args: PiralTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
+    configure(templateRoot, details);
+
     const {
       language = 'ts',
       packageName = 'piral',
-      mocks = 'mocks',
-      src = 'src',
+      mocks = '<src>/mocks',
+      src = '<root>/src',
       title = 'My Piral Instance',
       plugins = [],
       ...rest
@@ -62,8 +67,8 @@ export function createPiralTemplateFactory(
       root: '.',
       packageName,
       extension: getLanguageExtension(language, packageName !== 'piral-base'),
-      src: relative(root, resolve(root, src)),
-      mocks: relative(root, resolve(root, src, mocks)),
+      src,
+      mocks,
     };
 
     return Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
