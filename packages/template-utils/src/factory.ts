@@ -11,14 +11,14 @@ export function createPiletTemplateFactory(
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
-  return (root: string, args: PiletTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
+  return (projectRoot: string, args: PiletTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
     configure(templateRoot, details);
 
     const {
       language = 'ts',
       sourceName,
       src = '<root>/src',
-      plugins = getPlugins(root, sourceName),
+      plugins = getPlugins(projectRoot, sourceName),
       ...rest
     } = { ...defaultArgs, ...args };
     const sources = allSources.filter((m) => m.languages.includes(language));
@@ -26,6 +26,7 @@ export function createPiletTemplateFactory(
       ...rest,
       language,
       plugins,
+      projectRoot,
       root: '.',
       sourceName,
       extension: getLanguageExtension(language),
@@ -46,7 +47,7 @@ export function createPiralTemplateFactory(
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
-  return async (root: string, args: PiralTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
+  return async (projectRoot: string, args: PiralTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
     configure(templateRoot, details);
 
     const {
@@ -64,6 +65,7 @@ export function createPiralTemplateFactory(
       title,
       language,
       plugins,
+      projectRoot,
       root: '.',
       packageName,
       extension: getLanguageExtension(language, packageName !== 'piral-base'),

@@ -1,9 +1,15 @@
-import { resolve } from 'path';
+import { resolve, relative, isAbsolute } from 'path';
 import { renderFile } from 'ejs';
 import { TemplateFile, TemplateSource } from './types';
 import { log } from './log';
 
-function fillTemplate(sourceDir: string, name: string, data: any = {}) {
+export interface TemplateData {
+  projectRoot: string;
+  root: string;
+  src: string;
+}
+
+function fillTemplate<T extends TemplateData>(sourceDir: string, name: string, data: T) {
   const path = resolve(sourceDir, `${name}.ejs`);
 
   log('verbose', `Filling template of "${path}" ...`);
@@ -21,13 +27,13 @@ function fillTemplate(sourceDir: string, name: string, data: any = {}) {
   });
 }
 
-export async function getFileFromTemplate(
+export async function getFileFromTemplate<T extends TemplateData>(
   sourceDir: string,
   source: TemplateSource,
-  data: any = {},
+  data: T,
 ): Promise<TemplateFile> {
   const { target, name } = source;
-  const path = Object.keys(data).reduce((t, name) => {
+  const absPath = Object.keys(data).reduce((t, name) => {
     const k = `<${name}>`;
     const v = data[name];
 
@@ -37,6 +43,7 @@ export async function getFileFromTemplate(
 
     return t;
   }, target);
+  const path = isAbsolute(absPath) ? relative(data.projectRoot, absPath) : absPath;
 
   log('verbose', `Return template "${name}" with path "${path}" (from "${target}")`);
 
