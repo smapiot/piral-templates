@@ -19,7 +19,7 @@
   "homepage": "https://piral.io",
   "license": "MIT",
   "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "typings": "src/index.ts",
   "files": [
     "lib",
     "src"

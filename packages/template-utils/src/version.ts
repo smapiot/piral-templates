@@ -141,6 +141,6 @@ function satisfies(v: string, r: string) {
 
 export function checkVersion(desired: string, actual: string) {
   if (!satisfies(actual, desired)) {
-    log('warn', `The template was made for "piral-cli" versions "${desired}" but was used with "piral-cli@${actual}".`);
+    log('warn', `The template was made for "piral-cli" version "${desired}" but was used with "${actual}".`);
   }
 }

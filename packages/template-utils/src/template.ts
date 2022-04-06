@@ -3,6 +3,27 @@ import { renderFile } from 'ejs';
 import { TemplateFile, TemplateSource } from './types';
 import { log } from './log';
 
+const findVariable = /<(\w+)>/g;
+
+function replaceVariables<T extends TemplateData>(str: string, data: T) {
+  let match = findVariable.exec(str);
+
+  while (match) {
+    const [m, id] = match;
+    const val = data[id];
+
+    if (typeof val === 'string') {
+      str = str.replace(m, val);
+    } else {
+      str = str.replace(m, '.');
+    }
+
+    match = findVariable.exec(str);
+  }
+
+  return str;
+}
+
 export interface TemplateData {
   projectRoot: string;
   root: string;
@@ -33,16 +54,8 @@ export async function getFileFromTemplate<T extends TemplateData>(
   data: T,
 ): Promise<TemplateFile> {
   const { target, name } = source;
-  const absPath = Object.keys(data).reduce((t, name) => {
-    const k = `<${name}>`;
-    const v = data[name];
 
-    if (typeof v === 'string' && t.indexOf(k) !== -1) {
-      return t.replace(k, v);
-    }
-
-    return t;
-  }, target);
+  const absPath = replaceVariables(target, data);
   const path = isAbsolute(absPath) ? relative(data.projectRoot, absPath) : absPath;
 
   log('verbose', `Return template "${name}" with path "${path}" (from "${target}")`);
