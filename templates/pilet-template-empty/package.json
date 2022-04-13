@@ -16,6 +16,7 @@
     "node": ">=12.0",
     "piral": "^0.15.x"
   },
+  "templateOptions": {},
   "author": "smapiot",
   "homepage": "https://piral.io",
   "license": "MIT",

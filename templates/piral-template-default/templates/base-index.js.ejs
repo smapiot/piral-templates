@@ -1,7 +1,7 @@
 import { startLoadingPilets, createListener } from 'piral-base';
 
 // change to your feed URL here (either using feed.piral.cloud or your own service)
-const feedUrl = 'https://feed.piral.cloud/api/v1/pilet/empty';
+const feedUrl = '<%= typeof feedUrl !== 'undefined' ? feedUrl : 'https://feed.piral.cloud/api/v1/pilet/empty' %>';
 
 const loader = startLoadingPilets({
   createApi(meta) {

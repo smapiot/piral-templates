@@ -16,6 +16,18 @@
     "node": ">=12.0",
     "piral": "^0.15.x"
   },
+  "templateOptions": {
+    "title": {
+      "description": "Defines the title of the app / page.",
+      "default": "My Piral Instance",
+      "type": "string"
+    },
+    "feedUrl": {
+      "description": "Defines the URL to use for requesting the pilets.",
+      "default": "https://feed.piral.cloud/api/v1/pilet/empty",
+      "type": "string"
+    }
+  },
   "author": "smapiot",
   "homepage": "https://piral.io",
   "license": "MIT",
