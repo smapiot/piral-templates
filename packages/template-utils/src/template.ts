@@ -18,6 +18,7 @@ function replaceVariables<T extends TemplateData>(str: string, data: T) {
       str = str.replace(m, '.');
     }
 
+    findVariable.lastIndex = 0;
     match = findVariable.exec(str);
   }
 

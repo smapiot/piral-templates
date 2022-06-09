@@ -19,6 +19,7 @@ export function createPiletTemplateFactory(
       sourceName,
       src = '<root>/src',
       plugins = getPlugins(projectRoot, sourceName),
+      mocks = '<src>/mocks',
       ...rest
     } = { ...defaultArgs, ...args };
     const sources = allSources.filter((m) => m.languages.includes(language));
@@ -31,6 +32,7 @@ export function createPiletTemplateFactory(
       sourceName,
       extension: getLanguageExtension(language),
       src,
+      mocks,
     };
 
     return Promise.all([
@@ -56,6 +58,7 @@ export function createPiralTemplateFactory(
       mocks = '<src>/mocks',
       src = '<root>/src',
       title = 'My Piral Instance',
+      reactVersion = 17,
       plugins = [],
       ...rest
     } = { ...defaultArgs, ...args };
@@ -67,6 +70,7 @@ export function createPiralTemplateFactory(
       plugins,
       projectRoot,
       root: '.',
+      reactVersion,
       packageName,
       extension: getLanguageExtension(language, packageName !== 'piral-base'),
       src,

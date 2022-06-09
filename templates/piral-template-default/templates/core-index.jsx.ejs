@@ -1,5 +1,9 @@
 import * as React from 'react';
+<% if (reactVersion >= 18) { -%>
+import { createRoot } from 'react-dom/client';
+<% } else { -%>
 import { render } from 'react-dom';
+<% } -%>
 import { createInstance, Piral } from 'piral-core';
 import { layout, errors } from './layout';
 
@@ -19,4 +23,10 @@ const instance = createInstance({
   },
 });
 
+<% if (reactVersion >= 18) { -%>
+const root = createRoot(document.querySelector('#app'));
+
+root.render(<Piral instance={instance} />);
+<% } else { -%>
 render(<Piral instance={instance} />, document.querySelector('#app'));
+<% } -%>
