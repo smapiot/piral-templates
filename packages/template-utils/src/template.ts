@@ -54,14 +54,18 @@ export async function getFileFromTemplate<T extends TemplateData>(
   source: TemplateSource,
   data: T,
 ): Promise<TemplateFile> {
-  const { target, name } = source;
+  let { target, name, content } = source;
 
   const absPath = replaceVariables(target, data);
   const path = isAbsolute(absPath) ? relative(data.projectRoot, absPath) : absPath;
 
-  log('verbose', `Return template "${name}" with path "${path}" (from "${target}")`);
+  if (!content) {
+    log('verbose', `Return template "${name}" with path "${path}" (from "${target}")`);
 
-  const content = await fillTemplate(sourceDir, name, data);
+    content = await fillTemplate(sourceDir, name, data);
+  } else {
+    log('verbose', `Return template "${name}" with content at path "${path}" (from "${target}")`);
+  }
 
   return {
     content: Buffer.from(content, 'utf8'),

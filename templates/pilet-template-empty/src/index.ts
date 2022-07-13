@@ -3,7 +3,7 @@ import { createPiletTemplateFactory } from '@smapiot/template-utils';
 
 const root = resolve(__dirname, '..');
 
-export default createPiletTemplateFactory(root, [
+export default createPiletTemplateFactory(root, () => [
   {
     languages: ['js'],
     name: 'index.jsx',

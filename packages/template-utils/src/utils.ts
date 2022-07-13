@@ -13,11 +13,7 @@ export function getPackageJsonWithSource(targetDir: string, fileName: string) {
   });
 }
 
-export function getPlugins(root: string, sourceName: string) {
-  const plugins: Record<string, boolean> = {};
-
-  log('verbose', `Getting the plugins of "${sourceName}/package.json" ...`);
-
+export function getPiralInstance(root: string, sourceName: string) {
   try {
     const packageJsonPath = require.resolve(`${sourceName}/package.json`, {
       paths: [root],
@@ -25,8 +21,35 @@ export function getPlugins(root: string, sourceName: string) {
     log('verbose', `Found package JSON in "${packageJsonPath}"`);
     const sourcePath = dirname(packageJsonPath);
     const details = require(packageJsonPath);
-    log('verbose', `Looking for types in "${details.types || details.typings}"`);
-    const typingsPath = resolve(sourcePath, details.types || details.typings);
+    const types = details.types || details.typings;
+    log('verbose', `Looking for types in "${types}"`);
+    const typingsPath = types !== undefined ? resolve(sourcePath, types) : undefined;
+    const app = details.app;
+    log('verbose', `Looking for types in "${app}"`);
+    const appPath = app !== undefined ? resolve(sourcePath, app) : undefined;
+    return {
+      sourceName,
+      sourcePath,
+      details,
+      appPath,
+      typingsPath,
+    };
+  } catch (ex) {
+    log('error', `Error when getting Piral instance: ${ex}`);
+  }
+
+  return undefined;
+}
+
+export function getPlugins(root: string, sourceName: string) {
+  const plugins: Record<string, boolean> = {};
+
+  log('verbose', `Getting the plugins of "${sourceName}/package.json" ...`);
+
+  const piralInstance = getPiralInstance(root, sourceName);
+  const typingsPath = piralInstance?.typingsPath;
+
+  if (typingsPath) {
     log('verbose', `Reading file in "${typingsPath}"`);
     const typing = readFileSync(typingsPath, 'utf8');
     const match = /export interface PiletCustomApi extends (.*?) \{/g.exec(typing);
@@ -43,8 +66,6 @@ export function getPlugins(root: string, sourceName: string) {
         log('warn', `Could not find plugin for Pilet API "${api}"`);
       }
     }
-  } catch (ex) {
-    log('error', `Error when obtaining the plugins: ${ex}`);
   }
 
   return plugins;

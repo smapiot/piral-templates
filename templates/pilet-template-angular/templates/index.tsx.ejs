@@ -1,0 +1,25 @@
+import * as React from 'react';
+<% if (standalone) { -%>
+import { defineNgModule, fromNg } from 'piral-ng/convert';
+<% } -%>
+import { AppModule } from './app/app.module';
+import { PageComponent } from './app/page.component';
+import type { PiletApi } from '<%- sourceName %>';
+
+export function setup(app: PiletApi) {
+<% if (standalone) { %>
+	app.defineNgModule(AppModule, {
+    // remove the following if you actually want to enable zone.js
+		ngZone: 'noop',
+	});
+
+  app.registerPage('/sample', app.fromNg(PageComponent));
+<% } else { %>
+	defineNgModule(AppModule, {
+    // remove the following if you actually want to enable zone.js
+		ngZone: 'noop',
+	});
+
+  app.registerPage('/sample', fromNg(PageComponent));
+<% } %>
+}

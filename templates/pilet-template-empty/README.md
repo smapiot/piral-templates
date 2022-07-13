@@ -10,13 +10,13 @@ Use the template with `pilet new` or `npm init pilet`:
 
 ```sh
 # directly via the CLI (prefer to prefix with npx)
-pilet new --template empty <other-options>
+pilet new <app-shell> --template empty <other-options>
 
 # via the initializer - best option (NPM v6)
-npm init pilet --template empty <other-options>
+npm init pilet --source <app-shell> --template empty <other-options>
 
 # via the initializer - best option (NPM v7 and v8)
-npm init pilet -- --template empty <other-options>
+npm init pilet -- --source <app-shell> --template empty <other-options>
 ```
 
 ## Variables
@@ -24,7 +24,7 @@ npm init pilet -- --template empty <other-options>
 The following variables are available when scaffolding. They can be applied via the CLI flags, e.g.,
 
 ```sh
-pilet new --template empty --vars.foo "bar" --vars.qxz "something else"
+pilet new <app-shell> --template empty --vars.foo "bar" --vars.qxz "something else"
 ```
 
 For this template we have:

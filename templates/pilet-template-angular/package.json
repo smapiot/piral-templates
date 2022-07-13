@@ -1,7 +1,7 @@
 {
-  "name": "@smapiot/pilet-template-default",
+  "name": "@smapiot/pilet-template-angular",
   "version": "0.15.0",
-  "description": "Official scaffolding template for pilets: 'default'.",
+  "description": "Official scaffolding template for pilets: 'angular'.",
   "keywords": [
     "piral-cli",
     "pilet",
@@ -17,10 +17,15 @@
     "piral": "0.15.x"
   },
   "templateOptions": {
-    "title": {
-      "description": "Defines the title for the sample page.",
-      "default": "Title",
-      "type": "string"
+    "standalone": {
+      "description": "Defines if the pilet should include Angular - in case of the app shell not providing Angular already.",
+      "default": false,
+      "type": "boolean"
+    },
+    "ngVersion": {
+      "description": "Defines the (major) version of Angular to use in case of a standalone pilet.",
+      "default": 14,
+      "type": "number"
     }
   },
   "author": "smapiot",

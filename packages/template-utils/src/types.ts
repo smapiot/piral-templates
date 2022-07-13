@@ -5,6 +5,7 @@ export interface TemplateFile {
 
 export interface TemplateSource {
   name: string;
+  content?: string;
   languages: Array<'js' | 'ts'>;
   target: string;
 }
@@ -18,6 +19,7 @@ export interface PiralTemplateSource extends TemplateSource {
 export interface TemplateArgs {
   language?: 'js' | 'ts';
   src?: string;
+  mocks?: string;
 }
 
 export interface PiletTemplateArgs extends TemplateArgs {
@@ -27,7 +29,7 @@ export interface PiletTemplateArgs extends TemplateArgs {
 
 export interface PiralTemplateArgs extends TemplateArgs {
   packageName?: 'piral' | 'piral-core' | 'piral-base';
-  mocks?: string;
   title?: string;
   plugins?: Array<string>;
+  reactVersion?: number;
 }

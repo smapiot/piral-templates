@@ -4,27 +4,32 @@ import { configure, ExecutionDetails } from './parent';
 import { getLanguageExtension, getPackageJsonWithSource, getPlugins } from './utils';
 import { PiralTemplateArgs, PiletTemplateArgs, TemplateFile, PiletTemplateSource, PiralTemplateSource } from './types';
 
-export function createPiletTemplateFactory(
+export interface GetAllSources<TArgs, TSource> {
+  (projectRoot: string, args: TArgs, details: ExecutionDetails): Array<TSource>;
+}
+
+export function createPiletTemplateFactory<TExtra = {}>(
   templateRoot: string,
-  allSources: Array<PiletTemplateSource>,
-  defaultArgs: Partial<PiletTemplateArgs> = {},
+  getAllSources: GetAllSources<PiletTemplateArgs & Partial<TExtra>, PiletTemplateSource>,
+  defaultArgs: Partial<PiletTemplateArgs & TExtra> = {},
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
   return (projectRoot: string, args: PiletTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
     configure(templateRoot, details);
 
+    const allArgs = { ...defaultArgs, ...args };
     const {
       language = 'ts',
       sourceName,
       src = '<root>/src',
       plugins = getPlugins(projectRoot, sourceName),
       mocks = '<src>/mocks',
-      ...rest
-    } = { ...defaultArgs, ...args };
+    } = allArgs;
+    const allSources = getAllSources(projectRoot, allArgs, details);
     const sources = allSources.filter((m) => m.languages.includes(language));
     const data = {
-      ...rest,
+      ...allArgs,
       language,
       plugins,
       projectRoot,
@@ -42,16 +47,21 @@ export function createPiletTemplateFactory(
   };
 }
 
-export function createPiralTemplateFactory(
+export function createPiralTemplateFactory<TExtra = {}>(
   templateRoot: string,
-  allSources: Array<PiralTemplateSource>,
-  defaultArgs: Partial<PiralTemplateArgs> = {},
+  getAllSources: GetAllSources<PiralTemplateArgs & Partial<TExtra>, PiralTemplateSource>,
+  defaultArgs: Partial<PiralTemplateArgs & TExtra> = {},
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
-  return async (projectRoot: string, args: PiralTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
+  return async (
+    projectRoot: string,
+    args: PiralTemplateArgs,
+    details: ExecutionDetails,
+  ): Promise<Array<TemplateFile>> => {
     configure(templateRoot, details);
 
+    const allArgs = { ...defaultArgs, ...args };
     const {
       language = 'ts',
       packageName = 'piral',
@@ -60,11 +70,11 @@ export function createPiralTemplateFactory(
       title = 'My Piral Instance',
       reactVersion = 17,
       plugins = [],
-      ...rest
-    } = { ...defaultArgs, ...args };
+    } = allArgs;
+    const allSources = getAllSources(projectRoot, allArgs, details);
     const sources = allSources.filter((m) => m.languages.includes(language) && m.frameworks.includes(packageName));
     const data = {
-      ...rest,
+      ...allArgs,
       title,
       language,
       plugins,

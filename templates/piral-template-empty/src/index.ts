@@ -3,7 +3,7 @@ import { createPiralTemplateFactory } from '@smapiot/template-utils';
 
 const root = resolve(__dirname, '..');
 
-export default createPiralTemplateFactory(root, [
+export default createPiralTemplateFactory(root, () => [
   {
     name: 'core-index.html',
     frameworks: ['piral-core', 'piral'],

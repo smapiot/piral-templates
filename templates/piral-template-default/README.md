@@ -24,7 +24,7 @@ npm init piral-instance -- --template default <other-options>
 The following variables are available when scaffolding. They can be applied via the CLI flags, e.g.,
 
 ```sh
-piral new --template empty --vars.foo "bar" --vars.qxz "something else"
+piral new --template default --vars.foo "bar" --vars.qxz "something else"
 ```
 
 For this template we have:
