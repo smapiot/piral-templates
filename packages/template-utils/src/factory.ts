@@ -42,7 +42,7 @@ export function createPiletTemplateFactory<TExtra = {}>(
 
     return Promise.all([
       ...sources.map((source) => getFileFromTemplate(sourceDir, source, data)),
-      getPackageJsonWithSource(data.src, `index${data.extension}`),
+      getPackageJsonWithSource(data.projectRoot, data.src, `index${data.extension}`),
     ]);
   };
 }

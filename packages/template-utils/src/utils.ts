@@ -1,14 +1,15 @@
-import { posix, resolve, dirname } from 'path';
+import { posix, resolve, dirname, relative, isAbsolute } from 'path';
 import { readFileSync } from 'fs';
 import { log } from './log';
 
-export function getPackageJsonWithSource(targetDir: string, fileName: string) {
-  const path = posix.join(targetDir, fileName);
+export function getPackageJsonWithSource(root: string, targetDir: string, fileName: string) {
+  const absPath = posix.join(targetDir, fileName);
+  const path = isAbsolute(absPath) ? relative(root, absPath) : absPath;
 
-  log('verbose', `Adding 'source' to package.json "${path}" ...`);
+  log('verbose', `Adding "source" to package.json: "${path}"`);
 
   return Promise.resolve({
-    content: Buffer.from(`{"source":${JSON.stringify(path)}}`, 'utf8'),
+    content: Buffer.from(`{"source": ${JSON.stringify(path)}}`, 'utf8'),
     path: 'package.json',
   });
 }
