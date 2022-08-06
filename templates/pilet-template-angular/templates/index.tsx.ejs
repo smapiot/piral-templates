@@ -7,19 +7,19 @@ import { PageComponent } from './app/page.component';
 import type { PiletApi } from '<%- sourceName %>';
 
 export function setup(app: PiletApi) {
-<% if (standalone) { %>
+<% if (standalone) { -%>
 	app.defineNgModule(AppModule, {
     // remove the following if you actually want to enable zone.js
 		ngZone: 'noop',
 	});
 
   app.registerPage('/sample', app.fromNg(PageComponent));
-<% } else { %>
+<% } else { -%>
 	defineNgModule(AppModule, {
     // remove the following if you actually want to enable zone.js
 		ngZone: 'noop',
 	});
 
   app.registerPage('/sample', fromNg(PageComponent));
-<% } %>
+<% } -%>
 }

@@ -1,0 +1,64 @@
+{
+  "name": "@smapiot/pilet-template-svelte",
+  "version": "0.15.0",
+  "description": "Official scaffolding template for pilets: 'svelte'.",
+  "keywords": [
+    "piral-cli",
+    "pilet",
+    "template",
+    "scaffold",
+    "boilerplate"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=12.0",
+    "piral": "0.15.x"
+  },
+  "templateOptions": {
+    "standalone": {
+      "description": "Defines if the pilet should include Svelte - in case of the app shell not providing Svelte already.",
+      "default": false,
+      "type": "boolean"
+    },
+    "svelteVersion": {
+      "description": "Defines the (major) version of Svelte to use in case of a standalone pilet.",
+      "default": 3,
+      "type": "number"
+    },
+    "title": {
+      "description": "Defines the title for the sample page.",
+      "default": "Title",
+      "type": "string"
+    }
+  },
+  "author": "smapiot",
+  "homepage": "https://piral.io",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src",
+    "templates"
+  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/smapiot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smapiot/piral-templates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smapiot/piral-templates/issues"
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --outfile=./lib/index.js --platform=node",
+    "check": "tsc --noEmit",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "@smapiot/template-utils": "^0.15.0"
+  }
+}

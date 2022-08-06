@@ -1,0 +1,13 @@
+<% if (standalone) { -%>
+import { fromSvelte } from 'piral-svelte/convert';
+<% } -%>
+import Page from './Page.svelte';
+import type { PiletApi } from '<%- sourceName %>';
+
+export function setup(app: PiletApi) {
+<% if (standalone) { -%>
+  app.registerPage('/sample', app.fromSvelte(Page));
+<% } else { -%>
+  app.registerPage('/sample', fromSvelte(Page));
+<% } -%>
+}

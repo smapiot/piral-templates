@@ -1,0 +1,12 @@
+<% if (standalone) { -%>
+import { fromSvelte } from 'piral-svelte/convert';
+<% } -%>
+import Page from './Page.svelte';
+
+export function setup(app) {
+<% if (standalone) { -%>
+  app.registerPage('/sample', app.fromSvelte(Page));
+<% } else { -%>
+  app.registerPage('/sample', fromSvelte(Page));
+<% } -%>
+}

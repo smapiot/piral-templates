@@ -7,18 +7,18 @@ const Page = React.lazy(() => import('./Page'));
 export function setup(app: PiletApi) {
   app.registerPage('/page', Page);
 
-<% if (plugins.notifications) { %>
+<% if (plugins.notifications) { -%>
   app.showNotification('Hello from Piral!', {
     autoClose: 2000,
   });
-<% } %>
-<% if (plugins.menu) { %>
+<% } -%>
+<% if (plugins.menu) { -%>
   app.registerMenu(() => <Link to="/page">Page</Link>);
-<% } %>
-<% if (plugins.dashboard) { %>
+<% } -%>
+<% if (plugins.dashboard) { -%>
   app.registerTile(() => <div>Welcome to Piral!</div>, {
     initialColumns: 2,
     initialRows: 2,
   });
-<% } %>
+<% } -%>
 }
