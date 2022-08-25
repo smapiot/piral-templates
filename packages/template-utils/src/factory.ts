@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import { mergeFiles } from './merge';
 import { getFileFromTemplate } from './template';
 import { configure, ExecutionDetails } from './parent';
 import { getLanguageExtension, getPackageJsonWithSource, getPlugins } from './utils';
@@ -15,7 +16,11 @@ export function createPiletTemplateFactory<TExtra = {}>(
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
-  return (projectRoot: string, args: PiletTemplateArgs, details: ExecutionDetails): Promise<Array<TemplateFile>> => {
+  return async (
+    projectRoot: string,
+    args: PiletTemplateArgs,
+    details: ExecutionDetails,
+  ): Promise<Array<TemplateFile>> => {
     configure(templateRoot, details);
 
     const allArgs = { ...defaultArgs, ...args };
@@ -40,10 +45,11 @@ export function createPiletTemplateFactory<TExtra = {}>(
       mocks,
     };
 
-    return Promise.all([
+    const files = await Promise.all([
       ...sources.map((source) => getFileFromTemplate(sourceDir, source, data)),
       getPackageJsonWithSource(data.projectRoot, data.src, `index${data.extension}`),
     ]);
+    return mergeFiles(files);
   };
 }
 
@@ -87,6 +93,7 @@ export function createPiralTemplateFactory<TExtra = {}>(
       mocks,
     };
 
-    return Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
+    const files = await Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
+    return mergeFiles(files);
   };
 }
