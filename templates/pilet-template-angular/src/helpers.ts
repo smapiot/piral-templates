@@ -28,7 +28,6 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string) 
     importmap: {
       imports: {
         '@angular/animations': '.',
-        '@angular/cli': '.',
         '@angular/common': '.',
         '@angular/compiler': '.',
         '@angular/core': '.',
@@ -40,7 +39,6 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string) 
     },
     dependencies: {
       '@angular/animations': ngVersion,
-      '@angular/cli': ngVersion,
       '@angular/common': ngVersion,
       '@angular/compiler': ngVersion,
       '@angular/core': ngVersion,
@@ -54,6 +52,7 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string) 
     },
     devDependencies: {
       '@angular/compiler-cli': ngVersion,
+      '@angular/cli': ngVersion,
       '@ngtools/webpack': ngVersion,
       'copy-webpack-plugin': '^10',
       'html-loader': '^3',
