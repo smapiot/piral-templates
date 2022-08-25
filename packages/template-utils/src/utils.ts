@@ -1,17 +1,20 @@
 import { posix, resolve, dirname, relative, isAbsolute } from 'path';
 import { readFileSync } from 'fs';
 import { log } from './log';
+import { TemplateSource } from './types';
 
-export function getPackageJsonWithSource(root: string, targetDir: string, fileName: string) {
+export function getPackageJsonWithSource(root: string, targetDir: string, fileName: string): TemplateSource {
   const absPath = posix.join(targetDir, fileName);
   const path = isAbsolute(absPath) ? relative(root, absPath) : absPath;
 
   log('verbose', `Adding "source" to package.json: "${path}"`);
 
-  return Promise.resolve({
-    content: Buffer.from(`{"source": ${JSON.stringify(path)}}`, 'utf8'),
-    path: 'package.json',
-  });
+  return {
+    languages: ['ts', 'js'],
+    name: 'package.json',
+    content: JSON.stringify({ source: path }),
+    target: '<root>/package.json',
+  };
 }
 
 export function getPiralInstance(root: string, sourceName: string) {

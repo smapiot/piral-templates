@@ -44,11 +44,12 @@ export function createPiletTemplateFactory<TExtra = {}>(
       src,
       mocks,
     };
+    const defaultSource = getPackageJsonWithSource(data.projectRoot, data.src, `index${data.extension}`);
 
-    const files = await Promise.all([
-      ...sources.map((source) => getFileFromTemplate(sourceDir, source, data)),
-      getPackageJsonWithSource(data.projectRoot, data.src, `index${data.extension}`),
-    ]);
+    const files = await Promise.all(
+      [...sources, defaultSource].map((source) => getFileFromTemplate(sourceDir, source, data)),
+    );
+
     return mergeFiles(files);
   };
 }
@@ -94,6 +95,7 @@ export function createPiralTemplateFactory<TExtra = {}>(
     };
 
     const files = await Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
+
     return mergeFiles(files);
   };
 }
