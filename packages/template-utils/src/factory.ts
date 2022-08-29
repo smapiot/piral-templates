@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { mergeFiles } from './merge';
+import { mergeFiles } from './io';
 import { getFileFromTemplate } from './template';
 import { configure, ExecutionDetails } from './parent';
 import { getLanguageExtension, getPackageJsonWithSource, getPlugins } from './utils';
