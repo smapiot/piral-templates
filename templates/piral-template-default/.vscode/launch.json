@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-msedge",
+      "request": "launch",
+      "name": "webdebug",
+      "url": "http://localhost:1234",
+      "webRoot": "${workspaceFolder}",
+      "runtimeExecutable": "dev",
+      "runtimeArgs": []
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch Piral Instance",
+      "configurations": ["webdebug"],
+      "stopAll": true,
+      "preLaunchTask": "npm start"
+    }
+  ]
+}
