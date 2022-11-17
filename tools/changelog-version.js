@@ -26,7 +26,6 @@ function updateChangelogDate(changelogPath = defaultPath) {
   });
   const newContent = CHANGELOG.replace(matches[0], `## ${matches[1]} (${date})`);
   writeFileSync(changelogPath, newContent, 'utf8');
-  console.log('Changed CHANGELOG to', newContent);
 }
 
 function getVersion(full, flags) {
@@ -43,14 +42,12 @@ function getVersion(full, flags) {
 
 if (require.main === module) {
   const args = process.argv;
-  console.log('Called with args', args);
   const changelogVersion = getChangelogVersion();
   const version = getVersion(changelogVersion, args);
   const cwd = process.cwd();
   console.log(version);
 
   if (args.includes('--update')) {
-    console.log('Updating the changelog date');
     updateChangelogDate();
   } else if (args.includes('--apply')) {
     execSync(`lerna version ${version} --no-git-tag-version --yes`, {
