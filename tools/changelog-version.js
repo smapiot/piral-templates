@@ -43,12 +43,14 @@ function getVersion(full, flags) {
 
 if (require.main === module) {
   const args = process.argv;
+  console.log('Called with args', args);
   const changelogVersion = getChangelogVersion();
   const version = getVersion(changelogVersion, args);
   const cwd = process.cwd();
   console.log(version);
 
   if (args.includes('--update')) {
+    console.log('Updating the changelog date');
     updateChangelogDate();
   } else if (args.includes('--apply')) {
     execSync(`lerna version ${version} --no-git-tag-version --yes`, {
