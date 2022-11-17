@@ -26,6 +26,7 @@ function updateChangelogDate(changelogPath = defaultPath) {
   });
   const newContent = CHANGELOG.replace(matches[0], `## ${matches[1]} (${date})`);
   writeFileSync(changelogPath, newContent, 'utf8');
+  console.log('Changed CHANGELOG to', newContent);
 }
 
 function getVersion(full, flags) {

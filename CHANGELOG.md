@@ -1,4 +1,4 @@
-# Piral Changelog
+# Piral Templates Changelog
 
 ## 0.15.0 (tbd)
 
