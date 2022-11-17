@@ -47,6 +47,7 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string) 
       '@angular/platform-browser-dynamic': ngVersion,
       '@angular/router': ngVersion,
       'piral-ng': cliVersion,
+      'core-js': '^3.19.0',
       rxjs: '~7.4',
       'zone.js': '~0.11',
     },
