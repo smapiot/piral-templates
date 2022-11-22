@@ -3,7 +3,7 @@
 ## 0.15.1 (tbd)
 
 - Fixed issue when no plugins are integrated
-- Extended `angular` template
+- Extended `angular` template with menu component
 
 ## 0.15.0 (November 17, 2022)
 

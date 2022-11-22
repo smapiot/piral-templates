@@ -27,22 +27,18 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string) 
   return {
     importmap: {
       imports: {
-        '@angular/animations': '@angular/animations',
         '@angular/common': '@angular/common',
         '@angular/compiler': '@angular/compiler',
         '@angular/core': '@angular/core',
-        '@angular/forms': '@angular/forms',
         '@angular/platform-browser': '@angular/platform-browser',
         '@angular/platform-browser-dynamic': '@angular/platform-browser-dynamic',
         '@angular/router': '@angular/router',
       },
     },
     dependencies: {
-      '@angular/animations': ngVersion,
       '@angular/common': ngVersion,
       '@angular/compiler': ngVersion,
       '@angular/core': ngVersion,
-      '@angular/forms': ngVersion,
       '@angular/platform-browser': ngVersion,
       '@angular/platform-browser-dynamic': ngVersion,
       '@angular/router': ngVersion,

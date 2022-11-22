@@ -65,6 +65,16 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
     },
     {
       languages: ['ts'],
+      name: 'menu.component.html',
+      target: '<src>/app/menu.component.html',
+    },
+    {
+      languages: ['ts'],
+      name: 'menu.component.ts',
+      target: '<src>/app/menu.component.ts',
+    },
+    {
+      languages: ['ts'],
       name: 'index.tsx',
       target: '<src>/index.tsx',
     },
