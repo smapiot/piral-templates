@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 0.15.1 (tbd)
+## 0.15.1 (November 22, 2022)
 
 - Fixed issue when no plugins are integrated
 - Extended `angular` template with menu component
