@@ -57,8 +57,15 @@ export function getPlugins(root: string, sourceName: string) {
     log('verbose', `Reading file in "${typingsPath}"`);
     const typing = readFileSync(typingsPath, 'utf8');
     const match = /export interface PiletCustomApi extends (.*?) \{/g.exec(typing);
+
+    // in case nothing has been found
+    if (!match) {
+      log('verbose', `No Piral instance plugins have been found`);
+      return [];
+    }
+
     const apis = match[1].split(', ');
-    log('info', `Found Piral instance plugins "${match[1]}"`);
+    log('verbose', `Found Piral instance plugins "${match[1]}"`);
 
     for (const api of apis) {
       const pluginMatch = /^Pilet(.*)Api$/.exec(api);

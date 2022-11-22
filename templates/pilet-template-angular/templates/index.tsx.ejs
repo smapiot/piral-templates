@@ -5,6 +5,9 @@ import { defineNgModule, fromNg } from 'piral-ng/convert';
 <% } -%>
 import { AppModule } from './app/app.module';
 import { PageComponent } from './app/page.component';
+<% if (plugins.menu) { -%>
+import { MenuComponent } from './app/menu.component';
+<% } -%>
 import type { PiletApi } from '<%- sourceName %>';
 
 export function setup(app: PiletApi) {
@@ -14,12 +17,20 @@ export function setup(app: PiletApi) {
     ngZone: 'noop',
   });
 
+<% if (plugins.menu) { -%>
+  app.registerMenu(fromNg(MenuComponent));
+<% } -%>
+
   app.registerPage('/sample', fromNg(PageComponent));
 <% } else { -%>
   app.defineNgModule(AppModule, {
     // remove the following if you actually want to enable zone.js
     ngZone: 'noop',
   });
+
+<% if (plugins.menu) { -%>
+  app.registerMenu(app.fromNg(MenuComponent));
+<% } -%>
 
   app.registerPage('/sample', app.fromNg(PageComponent));
 <% } -%>
