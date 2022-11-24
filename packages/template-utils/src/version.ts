@@ -139,8 +139,22 @@ function satisfies(v: string, r: string) {
   return true;
 }
 
+function normalize(version: string) {
+  const dash = version.indexOf('-');
+
+  if (dash !== -1) {
+    // remove additional part that comes with beta / alpha versions
+    // we "think" that these match / provide truthful
+    return version.substring(0, dash);
+  }
+
+  return version;
+}
+
 export function checkVersion(desired: string, actual: string) {
-  if (!satisfies(actual, desired)) {
+  const normActual = normalize(actual);
+  const normDesired = normalize(desired);
+  if (!satisfies(normActual, normDesired)) {
     log('warn', `The template was made for "piral-cli" version "${desired}" but was used with "${actual}".`);
   }
 }
