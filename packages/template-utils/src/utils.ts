@@ -5,7 +5,8 @@ import { TemplateSource } from './types';
 
 export function makeRelative(path: string, root: string) {
   const relPath = isAbsolute(path) ? relative(root, path) : path;
-  return relPath.replaceAll(sep, posix.sep);
+  // would prefer using replaceAll below, but this is not available in Node v14
+  return relPath.split(sep).join(posix.sep);
 }
 
 export function getPackageJsonWithSource(root: string, targetDir: string, fileName: string): TemplateSource {
