@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 0.15.2 (tbd)
+## 0.15.2 (December 9, 2022)
 
 - Fixed template version comparison w.r.t. preview versions
 - Fixed `src` being an absolute path in `tsconfig.json`
