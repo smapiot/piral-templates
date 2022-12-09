@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { mergeFiles } from './io';
-import { getFileFromTemplate } from './template';
 import { configure, ExecutionDetails } from './parent';
+import { getFileFromTemplate, normalizeData } from './template';
 import { getLanguageExtension, getPackageJsonWithSource, getPlugins } from './utils';
 import { PiralTemplateArgs, PiletTemplateArgs, TemplateFile, PiletTemplateSource, PiralTemplateSource } from './types';
 
@@ -33,7 +33,7 @@ export function createPiletTemplateFactory<TExtra = {}>(
     } = allArgs;
     const allSources = getAllSources(projectRoot, allArgs, details);
     const sources = allSources.filter((m) => m.languages.includes(language));
-    const data = {
+    const data = normalizeData({
       ...allArgs,
       language,
       plugins,
@@ -43,7 +43,7 @@ export function createPiletTemplateFactory<TExtra = {}>(
       extension: getLanguageExtension(language),
       src,
       mocks,
-    };
+    });
     const defaultSource = getPackageJsonWithSource(data.projectRoot, data.src, `index${data.extension}`);
 
     const files = await Promise.all(
@@ -80,7 +80,7 @@ export function createPiralTemplateFactory<TExtra = {}>(
     } = allArgs;
     const allSources = getAllSources(projectRoot, allArgs, details);
     const sources = allSources.filter((m) => m.languages.includes(language) && m.frameworks.includes(packageName));
-    const data = {
+    const data = normalizeData({
       ...allArgs,
       title,
       language,
@@ -92,7 +92,7 @@ export function createPiralTemplateFactory<TExtra = {}>(
       extension: getLanguageExtension(language, packageName !== 'piral-base'),
       src,
       mocks,
-    };
+    });
 
     const files = await Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
 

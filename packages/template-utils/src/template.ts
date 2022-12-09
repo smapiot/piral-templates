@@ -1,7 +1,8 @@
-import { resolve, relative, isAbsolute } from 'path';
+import { resolve } from 'path';
 import { renderFile } from 'ejs';
-import { TemplateFile, TemplateSource } from './types';
 import { log } from './log';
+import { makeRelative } from './utils';
+import { TemplateFile, TemplateSource } from './types';
 
 const findVariable = /<(\w+)>/g;
 
@@ -29,6 +30,7 @@ export interface TemplateData {
   projectRoot: string;
   root: string;
   src: string;
+  mocks: string;
 }
 
 function fillTemplate<T extends TemplateData>(sourceDir: string, name: string, data: T) {
@@ -49,6 +51,12 @@ function fillTemplate<T extends TemplateData>(sourceDir: string, name: string, d
   });
 }
 
+export function normalizeData<T extends TemplateData>(data: T) {
+  data.src = makeRelative(replaceVariables(data.src, data), data.root);
+  data.mocks = makeRelative(replaceVariables(data.mocks, data), data.root);
+  return data;
+}
+
 export async function getFileFromTemplate<T extends TemplateData>(
   sourceDir: string,
   source: TemplateSource,
@@ -56,8 +64,7 @@ export async function getFileFromTemplate<T extends TemplateData>(
 ): Promise<TemplateFile> {
   let { target, name, content } = source;
 
-  const absPath = replaceVariables(target, data);
-  const path = isAbsolute(absPath) ? relative(data.projectRoot, absPath) : absPath;
+  const path = makeRelative(replaceVariables(target, data), data.projectRoot);
 
   if (!content) {
     log('verbose', `Return template "${name}" with path "${path}" (from "${target}")`);

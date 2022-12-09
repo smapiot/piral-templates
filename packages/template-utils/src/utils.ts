@@ -1,11 +1,15 @@
-import { posix, resolve, dirname, relative, isAbsolute } from 'path';
+import { posix, resolve, dirname, relative, isAbsolute, sep } from 'path';
 import { readFileSync } from 'fs';
 import { log } from './log';
 import { TemplateSource } from './types';
 
+export function makeRelative(path: string, root: string) {
+  const relPath = isAbsolute(path) ? relative(root, path) : path;
+  return relPath.replaceAll(sep, posix.sep);
+}
+
 export function getPackageJsonWithSource(root: string, targetDir: string, fileName: string): TemplateSource {
-  const absPath = posix.join(targetDir, fileName);
-  const path = isAbsolute(absPath) ? relative(root, absPath) : absPath;
+  const path = makeRelative(posix.join(targetDir, fileName), root);
 
   log('verbose', `Adding "source" to package.json: "${path}"`);
 

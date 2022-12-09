@@ -3,6 +3,7 @@
 ## 0.15.2 (tbd)
 
 - Fixed template version comparison w.r.t. preview versions
+- Fixed `src` being an absolute path in `tsconfig.json`
 
 ## 0.15.1 (November 22, 2022)
 
