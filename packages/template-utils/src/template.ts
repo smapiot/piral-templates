@@ -52,8 +52,8 @@ function fillTemplate<T extends TemplateData>(sourceDir: string, name: string, d
 }
 
 export function normalizeData<T extends TemplateData>(data: T) {
-  data.src = makeRelative(replaceVariables(data.src, data), data.root);
-  data.mocks = makeRelative(replaceVariables(data.mocks, data), data.root);
+  data.src = makeRelative(replaceVariables(data.src, data), data.projectRoot);
+  data.mocks = makeRelative(replaceVariables(data.mocks, data), data.projectRoot);
   return data;
 }
 
