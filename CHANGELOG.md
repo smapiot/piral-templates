@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 0.15.3 (tbd)
+## 0.15.3 (December 25, 2022)
 
 - Fixed wrong relative paths using `--target`
 
