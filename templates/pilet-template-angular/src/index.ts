@@ -39,6 +39,11 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
       target: '<root>/webpack.config.js',
     },
     {
+      languages: ['ts'],
+      name: 'index.tsx',
+      target: '<src>/index.tsx',
+    },
+    {
       languages: ['js'],
       name: 'index.jsx',
       target: '<src>/index.jsx',
@@ -72,11 +77,6 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
       languages: ['ts'],
       name: 'menu.component.ts',
       target: '<src>/app/menu.component.ts',
-    },
-    {
-      languages: ['ts'],
-      name: 'index.tsx',
-      target: '<src>/index.tsx',
     },
     {
       languages: ['ts'],

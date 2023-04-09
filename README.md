@@ -24,7 +24,9 @@ The official templates for Piral Instances and pilets.
 * [`default`](./templates/pilet-template-default/README.md)
 * [`empty`](./templates/pilet-template-empty/README.md)
 * [`angular`](./templates/pilet-template-angular/README.md)
+* [`solid`](./templates/pilet-template-solid/README.md)
 * [`svelte`](./templates/pilet-template-svelte/README.md)
+* [`vue`](./templates/pilet-template-vue/README.md)
 
 ## License
 

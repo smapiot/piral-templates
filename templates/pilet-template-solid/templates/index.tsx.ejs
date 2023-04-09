@@ -1,0 +1,15 @@
+<% if (standalone) { -%>
+import { fromSolid } from 'piral-solid/convert';
+<% } -%>
+import { lazy } from 'solid-js';
+import type { PiletApi } from '<%- sourceName %>';
+
+const Page = lazy(() => import('./Page'));
+
+export function setup(app: PiletApi) {
+<% if (standalone) { -%>
+  app.registerPage('/sample', app.fromSolid(Page));
+<% } else { -%>
+  app.registerPage('/sample', fromSolid(Page));
+<% } -%>
+}

@@ -1,16 +1,16 @@
 import { resolve } from 'path';
 import { createPiletTemplateFactory, getPiralInstance } from '@smapiot/template-utils';
-import { detectMode, detectSvelteVersion, getStandalonePackageJson, getStandardPackageJson } from './helpers';
+import { detectMode, detectSolidVersion, getStandalonePackageJson, getStandardPackageJson } from './helpers';
 
 const root = resolve(__dirname, '..');
 
-interface SveltePiletArgs {
+interface SolidPiletArgs {
   title: string;
   standalone: boolean;
-  svelteVersion: number;
+  solidVersion: number;
 }
 
-export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, args, details) => {
+export default createPiletTemplateFactory<SolidPiletArgs>(root, (projectRoot, args, details) => {
   const { sourceName } = args;
   const piralInstance = getPiralInstance(projectRoot, sourceName);
 
@@ -18,14 +18,14 @@ export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, a
     args.standalone = detectMode(piralInstance);
   }
 
-  if (typeof args.svelteVersion !== 'number') {
-    args.svelteVersion = detectSvelteVersion(piralInstance);
+  if (typeof args.solidVersion !== 'number') {
+    args.solidVersion = detectSolidVersion(piralInstance);
   }
 
-  const svelteVersion = `^${args.svelteVersion}`;
+  const solidVersion = `^${args.solidVersion}`;
   const packageJson = args.standalone
-    ? getStandalonePackageJson(details.cliVersion, svelteVersion)
-    : getStandardPackageJson(details.cliVersion, svelteVersion);
+    ? getStandalonePackageJson(details.cliVersion, solidVersion)
+    : getStandardPackageJson(details.cliVersion, solidVersion);
 
   return [
     {
@@ -35,14 +35,14 @@ export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, a
       target: '<root>/package.json',
     },
     {
-      languages: ['ts', 'js'],
-      name: 'webpack.config.js',
-      target: '<root>/webpack.config.js',
+      languages: ['ts'],
+      name: 'Page.tsx',
+      target: '<src>/Page.tsx',
     },
     {
-      languages: ['ts', 'js'],
-      name: 'Page.svelte',
-      target: '<src>/Page.svelte',
+      languages: ['js'],
+      name: 'Page.jsx',
+      target: '<src>/Page.jsx',
     },
     {
       languages: ['ts'],
@@ -53,6 +53,11 @@ export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, a
       languages: ['js'],
       name: 'index.jsx',
       target: '<src>/index.jsx',
+    },
+    {
+      languages: ['ts', 'js'],
+      name: 'babelrc',
+      target: '<root>/.babelrc',
     },
     {
       languages: ['ts'],

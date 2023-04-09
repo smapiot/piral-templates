@@ -1,5 +1,11 @@
 # Piral Templates Changelog
 
+## 0.15.4 (tbd)
+
+- Fixed missing root module for `svelte` template
+- Added `vue` template for pilets
+- Added `solid` template for pilets
+
 ## 0.15.3 (December 25, 2022)
 
 - Fixed wrong relative paths using `--target`

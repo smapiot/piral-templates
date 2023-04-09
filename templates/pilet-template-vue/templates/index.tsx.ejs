@@ -1,0 +1,13 @@
+<% if (standalone) { -%>
+import { <%- apiName %> } from '<%- packageName %>/convert';
+<% } -%>
+import Page from './Page.vue';
+import type { PiletApi } from '<%- sourceName %>';
+
+export function setup(app: PiletApi) {
+<% if (standalone) { -%>
+  app.registerPage('/sample', app.<%- apiName %>(Page));
+<% } else { -%>
+  app.registerPage('/sample', <%- apiName %>(Page));
+<% } -%>
+}
