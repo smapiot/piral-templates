@@ -7,8 +7,8 @@ const Page = lazy(() => import('./Page'));
 
 export function setup(app) {
 <% if (standalone) { -%>
-  app.registerPage('/sample', app.fromSolid(Page));
-<% } else { -%>
   app.registerPage('/sample', fromSolid(Page));
+<% } else { -%>
+  app.registerPage('/sample', app.fromSolid(Page));
 <% } -%>
 }

@@ -6,8 +6,8 @@ import type { PiletApi } from '<%- sourceName %>';
 
 export function setup(app: PiletApi) {
 <% if (standalone) { -%>
-  app.registerPage('/sample', app.<%- apiName %>(Page));
-<% } else { -%>
   app.registerPage('/sample', <%- apiName %>(Page));
+<% } else { -%>
+  app.registerPage('/sample', app.<%- apiName %>(Page));
 <% } -%>
 }

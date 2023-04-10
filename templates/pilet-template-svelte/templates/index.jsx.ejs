@@ -5,8 +5,8 @@ import Page from './Page.svelte';
 
 export function setup(app) {
 <% if (standalone) { -%>
-  app.registerPage('/sample', app.fromSvelte(Page));
-<% } else { -%>
   app.registerPage('/sample', fromSvelte(Page));
+<% } else { -%>
+  app.registerPage('/sample', app.fromSvelte(Page));
 <% } -%>
 }

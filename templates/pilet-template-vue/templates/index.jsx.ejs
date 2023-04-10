@@ -5,8 +5,8 @@ import Page from './Page.vue';
 
 export function setup(app) {
 <% if (standalone) { -%>
-  app.registerPage('/sample', app.<%- apiName %>(Page));
-<% } else { -%>
   app.registerPage('/sample', <%- apiName %>(Page));
+<% } else { -%>
+  app.registerPage('/sample', app.<%- apiName %>(Page));
 <% } -%>
 }
