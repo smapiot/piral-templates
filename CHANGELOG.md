@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 0.15.5 (tbd)
+
+- Improved `vue` template with enhanced support for Vue 2
+
 ## 0.15.4 (April 10, 2023)
 
 - Fixed missing root module for `svelte` template

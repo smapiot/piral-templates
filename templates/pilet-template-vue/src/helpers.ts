@@ -26,14 +26,15 @@ export function detectVueVersion(piralInstance: { details: any }) {
 export function getStandalonePackageJson(cliVersion: string, vueVersion: string, sfc: boolean) {
   const devDependencies = {
     vue: vueVersion,
+    '@vue/compiler-sfc': vueVersion,
   };
 
   if (sfc) {
     devDependencies['piral-vue-3'] = cliVersion;
-    devDependencies['@vue/compiler-sfc'] = vueVersion;
-    devDependencies['vue-loader'] = 'latest';
+    devDependencies['vue-loader'] = '^18';
   } else {
     devDependencies['piral-vue'] = cliVersion;
+    devDependencies['vue-loader'] = '^15';
   }
 
   return {
@@ -44,13 +45,15 @@ export function getStandalonePackageJson(cliVersion: string, vueVersion: string,
 export function getStandardPackageJson(cliVersion: string, vueVersion: string, sfc: boolean) {
   const devDependencies = {
     vue: vueVersion,
+    '@vue/compiler-sfc': vueVersion,
   };
 
   if (sfc) {
     devDependencies['piral-vue-3'] = cliVersion;
-    devDependencies['@vue/compiler-sfc'] = vueVersion;
-    devDependencies['vue-loader'] = 'latest';
+    devDependencies['vue-loader'] = '^18';
   } else {
+    devDependencies['piral-vue'] = cliVersion;
+    devDependencies['vue-loader'] = '^15';
   }
 
   return {

@@ -46,11 +46,6 @@ export default createPiletTemplateFactory<VuePiletArgs>(root, (projectRoot, args
       target: '<root>/package.json',
     },
     {
-      languages: ['ts', 'js'],
-      name: 'Page.vue',
-      target: '<src>/Page.vue',
-    },
-    {
       languages: ['ts'],
       name: 'index.tsx',
       target: '<src>/index.tsx',
@@ -65,13 +60,24 @@ export default createPiletTemplateFactory<VuePiletArgs>(root, (projectRoot, args
       name: 'tsconfig.json',
       target: '<root>/tsconfig.json',
     },
+    {
+      languages: ['ts', 'js'],
+      name: 'webpack.config.js',
+      target: '<root>/webpack.config.js',
+    },
   ];
 
   if (args.vueVersion >= 3) {
     files.push({
       languages: ['ts', 'js'],
-      name: 'webpack.config.js',
-      target: '<root>/webpack.config.js',
+      name: 'Page.vue',
+      target: '<src>/Page.vue',
+    });
+  } else {
+    files.push({
+      languages: ['ts', 'js'],
+      name: 'Page2.vue',
+      target: '<src>/Page.vue',
     });
   }
 
