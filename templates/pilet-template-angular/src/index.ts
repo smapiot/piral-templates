@@ -19,6 +19,8 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
 
   if (typeof args.ngVersion !== 'number') {
     args.ngVersion = detectNgVersion(piralInstance);
+  } else if (args.ngVersion !== detectNgVersion(piralInstance)) {
+    args.standalone = true;
   }
 
   const ngVersion = `^${args.ngVersion}`;

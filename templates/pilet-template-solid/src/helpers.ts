@@ -25,6 +25,12 @@ export function detectSolidVersion(piralInstance: { details: any }) {
 
 export function getStandalonePackageJson(cliVersion: string, solidVersion: string) {
   return {
+    importmap: {
+      imports: {
+        'solid-js': 'solid-js',
+        'solid-js/web': 'solid-js/web',
+      },
+    },
     devDependencies: {
       'babel-preset-solid': solidVersion,
       'piral-solid': cliVersion,

@@ -38,6 +38,11 @@ export function getStandalonePackageJson(cliVersion: string, vueVersion: string,
   }
 
   return {
+    importmap: {
+      imports: {
+        vue: 'vue',
+      },
+    },
     devDependencies,
   };
 }

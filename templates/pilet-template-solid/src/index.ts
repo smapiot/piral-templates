@@ -20,6 +20,8 @@ export default createPiletTemplateFactory<SolidPiletArgs>(root, (projectRoot, ar
 
   if (typeof args.solidVersion !== 'number') {
     args.solidVersion = detectSolidVersion(piralInstance);
+  } else if (args.solidVersion !== detectSolidVersion(piralInstance)) {
+    args.standalone = true;
   }
 
   const solidVersion = `^${args.solidVersion}`;

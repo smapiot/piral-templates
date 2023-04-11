@@ -22,6 +22,8 @@ export default createPiletTemplateFactory<VuePiletArgs>(root, (projectRoot, args
 
   if (typeof args.vueVersion !== 'number') {
     args.vueVersion = detectVueVersion(piralInstance);
+  } else if (args.vueVersion !== detectVueVersion(piralInstance)) {
+    args.standalone = true;
   }
 
   const vueVersion = `^${args.vueVersion}`;

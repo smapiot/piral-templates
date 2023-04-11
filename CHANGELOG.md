@@ -3,6 +3,8 @@
 ## 0.15.5 (tbd)
 
 - Improved `vue` template with enhanced support for Vue 2
+- Improved detection of standalone mode also to support using different versions
+- Improved templates by adding distributed sharing to standalone mode
 
 ## 0.15.4 (April 10, 2023)
 

@@ -20,6 +20,8 @@ export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, a
 
   if (typeof args.svelteVersion !== 'number') {
     args.svelteVersion = detectSvelteVersion(piralInstance);
+  } else if (args.svelteVersion !== detectSvelteVersion(piralInstance)) {
+    args.standalone = true;
   }
 
   const svelteVersion = `^${args.svelteVersion}`;
