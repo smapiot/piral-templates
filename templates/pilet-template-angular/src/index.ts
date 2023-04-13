@@ -25,8 +25,8 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
 
   const ngVersion = `^${args.ngVersion}`;
   const packageJson = args.standalone
-    ? getStandalonePackageJson(details.cliVersion, ngVersion)
-    : getStandardPackageJson(details.cliVersion, ngVersion);
+    ? getStandalonePackageJson(details.cliVersion, ngVersion, args.ngVersion)
+    : getStandardPackageJson(details.cliVersion, ngVersion, args.ngVersion);
 
   return [
     {

@@ -1,3 +1,5 @@
+import { rxjsVersions, tsVersions, zoneVersions } from './versions';
+
 export function detectMode(piralInstance: { details: any }) {
   const dependencies = piralInstance?.details?.dependencies || {};
   const devDependencies = piralInstance?.details?.devDependencies || {};
@@ -23,7 +25,7 @@ export function detectNgVersion(piralInstance: { details: any }) {
   return 14;
 }
 
-export function getStandalonePackageJson(cliVersion: string, ngVersion: string) {
+export function getStandalonePackageJson(cliVersion: string, ngVersion: string, majorNgVersion: number) {
   return {
     importmap: {
       imports: {
@@ -44,8 +46,8 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string) 
       '@angular/router': ngVersion,
       'piral-ng': cliVersion,
       'core-js': '^3.19.0',
-      rxjs: '~7.4',
-      'zone.js': '~0.11',
+      rxjs: rxjsVersions[majorNgVersion] || '^7.4',
+      'zone.js': zoneVersions[majorNgVersion] || '^0.13',
     },
     devDependencies: {
       '@angular/compiler-cli': ngVersion,
@@ -54,11 +56,12 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string) 
       'copy-webpack-plugin': '^10',
       'html-loader': '^3',
       'to-string-loader': '^1',
+      typescript: tsVersions[majorNgVersion] || 'latest',
     },
   };
 }
 
-export function getStandardPackageJson(cliVersion: string, ngVersion: string) {
+export function getStandardPackageJson(cliVersion: string, ngVersion: string, majorNgVersion: number) {
   return {
     devDependencies: {
       '@angular/compiler-cli': ngVersion,
@@ -67,6 +70,7 @@ export function getStandardPackageJson(cliVersion: string, ngVersion: string) {
       'html-loader': '^3',
       'to-string-loader': '^1',
       'piral-ng': cliVersion,
+      typescript: tsVersions[majorNgVersion] || 'latest',
     },
   };
 }

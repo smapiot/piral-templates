@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 0.15.6 (tbd)
+
+- Fixed used version of `typescript` (and libs) in `angular` template
+
 ## 0.15.5 (April 11, 2023)
 
 - Improved `vue` template with enhanced support for Vue 2
