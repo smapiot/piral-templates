@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.0 (tbd)
+
+- Updated for Piral 1.0.0
+
 ## 0.15.6 (April 14, 2023)
 
 - Fixed used version of `typescript` (and libs) in `angular` template
