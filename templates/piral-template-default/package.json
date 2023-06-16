@@ -14,7 +14,7 @@
   },
   "engines": {
     "node": ">=12.0",
-    "piral": "0.15.x || 1.x"
+    "piral": "1.x"
   },
   "templateOptions": {
     "title": {
