@@ -1,6 +1,6 @@
 {
   "name": "@smapiot/pilet-template-angular",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official scaffolding template for pilets: 'angular'.",
   "keywords": [
     "piral-cli",
@@ -54,6 +54,6 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "@smapiot/template-utils": "^1.0.0"
+    "@smapiot/template-utils": "^1.0.1"
   }
 }
