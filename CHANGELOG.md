@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.1 (June 26, 2023)
+## 1.0.1 (June 27, 2023)
 
 - Fixed condition checking on the templates
 
