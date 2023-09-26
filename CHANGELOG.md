@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.2 (tbd)
+## 1.0.2 (September 26, 2023)
 
 - Updated default version of Angular
 - Improved routing in Angular template
