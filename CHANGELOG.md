@@ -1,5 +1,10 @@
 # Piral Templates Changelog
 
+## 1.0.2 (tbd)
+
+- Updated default version of Angular
+- Improved routing in Angular template
+
 ## 1.0.1 (June 27, 2023)
 
 - Fixed condition checking on the templates
