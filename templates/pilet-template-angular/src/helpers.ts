@@ -25,6 +25,10 @@ export function detectNgVersion(piralInstance: { details: any }) {
   return 14;
 }
 
+export function isKnownVersion(majorNgVersion: number) {
+  return typeof zoneVersions[majorNgVersion] !== 'undefined';
+}
+
 export function getStandalonePackageJson(cliVersion: string, ngVersion: string, majorNgVersion: number) {
   return {
     importmap: {
