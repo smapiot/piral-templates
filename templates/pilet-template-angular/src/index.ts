@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { createPiletTemplateFactory, getPiralInstance } from '@smapiot/template-utils';
+import { createPiletTemplateFactory, getPiralInstance, log } from '@smapiot/template-utils';
 import { detectMode, detectNgVersion, getStandalonePackageJson, getStandardPackageJson } from './helpers';
 
 const root = resolve(__dirname, '..');
@@ -21,6 +21,10 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
     args.ngVersion = detectNgVersion(piralInstance);
   } else if (args.ngVersion !== detectNgVersion(piralInstance)) {
     args.standalone = true;
+  }
+
+  if (args.ngVersion < 9) {
+    log('warn', `Angular version ${args.ngVersion} is not officially supported. It might not work.`);
   }
 
   const ngVersion = `^${args.ngVersion}`;

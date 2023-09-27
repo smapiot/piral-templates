@@ -1,5 +1,10 @@
 # Piral Templates Changelog
 
+## 1.0.3 (tbd)
+
+- Added warning for non-supported Angular version
+- Updated Angular template with piral-ng-common reference
+
 ## 1.0.2 (September 26, 2023)
 
 - Updated default version of Angular
