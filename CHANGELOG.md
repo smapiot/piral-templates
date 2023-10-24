@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.4 (tbd)
+## 1.0.4 (October 24, 2023)
 
 - Fixed reverse warning with Angular versions
 - Updated default Angular version to 16
