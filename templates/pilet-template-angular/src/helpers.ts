@@ -11,7 +11,7 @@ export function detectNgVersion(piralInstance: { details: any }) {
   const dependencies = piralInstance?.details?.dependencies || {};
   const devDependencies = piralInstance?.details?.devDependencies || {};
   const allDependencies = { ...devDependencies, ...dependencies };
-  const version = allDependencies['@angular/core'] || '14.0.0';
+  const version = allDependencies['@angular/core'] || '16.0.0';
 
   if (typeof version === 'string') {
     const result = /\d+/.exec(version);
@@ -22,7 +22,7 @@ export function detectNgVersion(piralInstance: { details: any }) {
     }
   }
 
-  return 14;
+  return 16;
 }
 
 export function isKnownVersion(majorNgVersion: number) {

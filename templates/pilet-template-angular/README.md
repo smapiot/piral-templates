@@ -24,7 +24,7 @@ npm init pilet -- --source <app-shell> --template angular <other-options>
 The following variables are available when scaffolding. They can be applied via the CLI flags, e.g.,
 
 ```sh
-pilet new <app-shell> --template angular --vars.standalone true --vars.ngVersion 14
+pilet new <app-shell> --template angular --vars.standalone true --vars.ngVersion 16
 ```
 
 For this template we have:

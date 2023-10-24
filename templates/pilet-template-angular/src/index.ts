@@ -25,7 +25,7 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
 
   if (args.ngVersion < 9) {
     log('warn', `Angular version ${args.ngVersion} is not officially supported. It might not work.`);
-  } else if (isKnownVersion(args.ngVersion)) {
+  } else if (!isKnownVersion(args.ngVersion)) {
     log('warn', `Angular version ${args.ngVersion} is not known and therefore not yet officially supported. It might not work.`);
   }
 
