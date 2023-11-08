@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.5 (tbd)
+
+- Fixed issue with version of `vue-loader` (#1)
+
 ## 1.0.4 (October 24, 2023)
 
 - Fixed reverse warning with Angular versions

@@ -1,3 +1,6 @@
+const vueNewLoaderVersion = "^17";
+const vueOldLoaderVersion = "^15";
+
 export function detectMode(piralInstance: { details: any }) {
   const dependencies = piralInstance?.details?.dependencies || {};
   const devDependencies = piralInstance?.details?.devDependencies || {};
@@ -31,10 +34,10 @@ export function getStandalonePackageJson(cliVersion: string, vueVersion: string,
 
   if (sfc) {
     devDependencies['piral-vue-3'] = cliVersion;
-    devDependencies['vue-loader'] = '^18';
+    devDependencies['vue-loader'] = vueNewLoaderVersion;
   } else {
     devDependencies['piral-vue'] = cliVersion;
-    devDependencies['vue-loader'] = '^15';
+    devDependencies['vue-loader'] = vueOldLoaderVersion;
   }
 
   return {
@@ -55,10 +58,10 @@ export function getStandardPackageJson(cliVersion: string, vueVersion: string, s
 
   if (sfc) {
     devDependencies['piral-vue-3'] = cliVersion;
-    devDependencies['vue-loader'] = '^18';
+    devDependencies['vue-loader'] = vueNewLoaderVersion;
   } else {
     devDependencies['piral-vue'] = cliVersion;
-    devDependencies['vue-loader'] = '^15';
+    devDependencies['vue-loader'] = vueOldLoaderVersion;
   }
 
   return {
