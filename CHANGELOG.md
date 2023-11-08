@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.5 (tbd)
+## 1.0.5 (November 8, 2023)
 
 - Fixed issue with version of `vue-loader` (#1)
 
