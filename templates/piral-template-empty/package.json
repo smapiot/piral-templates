@@ -1,6 +1,6 @@
 {
   "name": "@smapiot/piral-template-empty",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Official scaffolding template for Piral instances: 'empty'.",
   "keywords": [
     "piral-cli",
@@ -50,6 +50,6 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "@smapiot/template-utils": "^1.0.4"
+    "@smapiot/template-utils": "^1.0.5"
   }
 }
