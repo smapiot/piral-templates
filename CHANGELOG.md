@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.6 (tbd)
+
+- Improved template for `piral-solid` to respect different bundlers
+
 ## 1.0.5 (November 8, 2023)
 
 - Fixed issue with version of `vue-loader` (#1)

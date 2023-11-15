@@ -1,3 +1,5 @@
+import { getProjectJson } from '@smapiot/template-utils';
+
 export function detectMode(piralInstance: { details: any }) {
   const dependencies = piralInstance?.details?.dependencies || {};
   const devDependencies = piralInstance?.details?.devDependencies || {};
@@ -23,7 +25,97 @@ export function detectSolidVersion(piralInstance: { details: any }) {
   return 1;
 }
 
-export function getStandalonePackageJson(cliVersion: string, solidVersion: string) {
+export function detectBundler(root: string) {
+  const projectJson = getProjectJson(root);
+  const devDependencies = projectJson?.devDependencies;
+
+  if (projectJson) {
+    const bundlers = ['esbuild', 'webpack5', 'webpack', 'vite', 'parcel2', 'parcel', 'bun'];
+
+    for (const bundler of bundlers) {
+      if (bundler in devDependencies) {
+        return bundler;
+      }
+    }
+  }
+
+  // no piral-cli-... found - use fallback
+  return 'xbuild';
+}
+
+export function getBundlerFiles(bundler: string) {
+  const bundlers = {
+    esbuild: [
+      {
+        languages: ['ts', 'js'],
+        name: 'esbuild.config.js',
+        target: '<root>/esbuild.config.js',
+      },
+    ],
+    webpack: [
+      {
+        languages: ['ts', 'js'],
+        name: 'babelrc',
+        target: '<root>/.babelrc',
+      },
+    ],
+    webpack5: [
+      {
+        languages: ['ts', 'js'],
+        name: 'babelrc',
+        target: '<root>/.babelrc',
+      },
+    ],
+    parcel: [
+      {
+        languages: ['ts', 'js'],
+        name: 'babelrc',
+        target: '<root>/.babelrc',
+      },
+    ],
+    parcel2: [
+      {
+        languages: ['ts', 'js'],
+        name: 'babelrc',
+        target: '<root>/.babelrc',
+      },
+    ],
+  };
+
+  if (bundler in bundlers) {
+    return bundlers[bundler];
+  }
+
+  return {};
+}
+
+export function getBundlerDependencies(bundler: string, solidVersion: string) {
+  const bundlers = {
+    esbuild: {
+      'esbuild-plugin-solid': '^0.5.0',
+    },
+    webpack: {
+      'babel-preset-solid': solidVersion,
+    },
+    webpack5: {
+      'babel-preset-solid': solidVersion,
+    },
+    parcel: {
+      'babel-preset-solid': solidVersion,
+    },
+    parcel2: {
+      'babel-preset-solid': solidVersion,
+    },
+  };
+
+  if (bundler in bundlers) {
+    return bundlers[bundler];
+  }
+
+  return {};
+}
+
+export function getStandalonePackageJson(bundler: string, cliVersion: string, solidVersion: string) {
   return {
     importmap: {
       imports: {
@@ -32,17 +124,17 @@ export function getStandalonePackageJson(cliVersion: string, solidVersion: strin
       },
     },
     devDependencies: {
-      'babel-preset-solid': solidVersion,
+      ...getBundlerDependencies(bundler, solidVersion),
       'piral-solid': cliVersion,
       'solid-js': solidVersion,
     },
   };
 }
 
-export function getStandardPackageJson(_cliVersion: string, solidVersion: string) {
+export function getStandardPackageJson(bundler: string, _cliVersion: string, solidVersion: string) {
   return {
     devDependencies: {
-      'babel-preset-solid': solidVersion,
+      ...getBundlerDependencies(bundler, solidVersion),
       'solid-js': solidVersion,
     },
   };

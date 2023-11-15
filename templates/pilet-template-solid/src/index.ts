@@ -1,6 +1,13 @@
 import { resolve } from 'path';
 import { createPiletTemplateFactory, getPiralInstance } from '@smapiot/template-utils';
-import { detectMode, detectSolidVersion, getStandalonePackageJson, getStandardPackageJson } from './helpers';
+import {
+  detectBundler,
+  detectMode,
+  detectSolidVersion,
+  getBundlerFiles,
+  getStandalonePackageJson,
+  getStandardPackageJson,
+} from './helpers';
 
 const root = resolve(__dirname, '..');
 
@@ -24,10 +31,11 @@ export default createPiletTemplateFactory<SolidPiletArgs>(root, (projectRoot, ar
     args.standalone = true;
   }
 
+  const bundler = detectBundler(projectRoot);
   const solidVersion = `^${args.solidVersion}`;
   const packageJson = args.standalone
-    ? getStandalonePackageJson(details.cliVersion, solidVersion)
-    : getStandardPackageJson(details.cliVersion, solidVersion);
+    ? getStandalonePackageJson(bundler, details.cliVersion, solidVersion)
+    : getStandardPackageJson(bundler, details.cliVersion, solidVersion);
 
   return [
     {
@@ -57,14 +65,10 @@ export default createPiletTemplateFactory<SolidPiletArgs>(root, (projectRoot, ar
       target: '<src>/index.jsx',
     },
     {
-      languages: ['ts', 'js'],
-      name: 'babelrc',
-      target: '<root>/.babelrc',
-    },
-    {
       languages: ['ts'],
       name: 'tsconfig.json',
       target: '<root>/tsconfig.json',
     },
+    ...getBundlerFiles(bundler),
   ];
 });

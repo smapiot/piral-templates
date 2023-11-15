@@ -22,6 +22,16 @@ export function getPackageJsonWithSource(root: string, targetDir: string, fileNa
   };
 }
 
+export function getProjectJson(root: string) {
+  try {
+    return require(`${root}/package.json`);
+  } catch (ex) {
+    log('error', `Error when reading the "package.json": ${ex}`);
+  }
+
+  return undefined;
+}
+
 export function getPiralInstance(root: string, sourceName: string) {
   try {
     const packageJsonPath = require.resolve(`${sourceName}/package.json`, {
