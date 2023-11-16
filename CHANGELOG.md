@@ -1,5 +1,11 @@
 # Piral Templates Changelog
 
+## 1.0.7 (tbd)
+
+- Improved template for `piral-vue` / `piral-vue3` to respect different bundlers
+- Added support for `piral-cli-vite` to the solid template
+- Added `detectBundler` helper to the `@smapiot/template-utils` package
+
 ## 1.0.6 (November 16, 2023)
 
 - Improved template for `piral-solid` to respect different bundlers

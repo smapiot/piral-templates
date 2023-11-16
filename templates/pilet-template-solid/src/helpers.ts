@@ -1,5 +1,3 @@
-import { getProjectJson } from '@smapiot/template-utils';
-
 export function detectMode(piralInstance: { details: any }) {
   const dependencies = piralInstance?.details?.dependencies || {};
   const devDependencies = piralInstance?.details?.devDependencies || {};
@@ -25,26 +23,6 @@ export function detectSolidVersion(piralInstance: { details: any }) {
   return 1;
 }
 
-export function detectBundler(root: string) {
-  const projectJson = getProjectJson(root);
-  const devDependencies = projectJson?.devDependencies;
-
-  if (projectJson) {
-    const bundlers = ['esbuild', 'webpack5', 'webpack', 'vite', 'parcel2', 'parcel', 'bun'];
-
-    for (const bundler of bundlers) {
-      const dependencyName = `piral-cli-${bundler}`;
-
-      if (dependencyName in devDependencies) {
-        return bundler;
-      }
-    }
-  }
-
-  // no piral-cli-... found - use fallback
-  return 'xbuild';
-}
-
 export function getBundlerFiles(bundler: string) {
   const bundlers = {
     esbuild: [
@@ -52,6 +30,20 @@ export function getBundlerFiles(bundler: string) {
         languages: ['ts', 'js'],
         name: 'esbuild.config.js',
         target: '<root>/esbuild.config.js',
+      },
+    ],
+    vite: [
+      {
+        languages: ['ts', 'js'],
+        name: 'vite.config.js',
+        target: '<root>/vite.config.js',
+      },
+    ],
+    rspack: [
+      {
+        languages: ['ts', 'js'],
+        name: 'babelrc',
+        target: '<root>/.babelrc',
       },
     ],
     webpack: [
@@ -96,6 +88,9 @@ export function getBundlerDependencies(bundler: string, solidVersion: string) {
     esbuild: {
       'esbuild-plugin-solid': '^0.5.0',
     },
+    rspack: {
+      'babel-preset-solid': solidVersion,
+    },
     webpack: {
       'babel-preset-solid': solidVersion,
     },
@@ -107,6 +102,9 @@ export function getBundlerDependencies(bundler: string, solidVersion: string) {
     },
     parcel2: {
       'babel-preset-solid': solidVersion,
+    },
+    vite: {
+      'vite-plugin-solid': '^2.0.0',
     },
   };
 

@@ -1,6 +1,11 @@
 import { resolve } from 'path';
-import { createPiletTemplateFactory, getPiralInstance, PiletTemplateSource } from '@smapiot/template-utils';
-import { detectMode, detectVueVersion, getStandalonePackageJson, getStandardPackageJson } from './helpers';
+import {
+  createPiletTemplateFactory,
+  detectBundler,
+  getPiralInstance,
+  PiletTemplateSource,
+} from '@smapiot/template-utils';
+import { detectMode, detectVueVersion, getBundlerFiles, getStandalonePackageJson, getStandardPackageJson } from './helpers';
 
 const root = resolve(__dirname, '..');
 
@@ -26,11 +31,12 @@ export default createPiletTemplateFactory<VuePiletArgs>(root, (projectRoot, args
     args.standalone = true;
   }
 
+  const bundler = detectBundler(projectRoot);
   const vueVersion = `^${args.vueVersion}`;
   const isSfc = args.vueVersion >= 3;
   const packageJson = args.standalone
-    ? getStandalonePackageJson(details.cliVersion, vueVersion, isSfc)
-    : getStandardPackageJson(details.cliVersion, vueVersion, isSfc);
+    ? getStandalonePackageJson(bundler, details.cliVersion, vueVersion, isSfc)
+    : getStandardPackageJson(bundler, details.cliVersion, vueVersion, isSfc);
 
   if (isSfc) {
     args.apiName = 'fromVue3';
@@ -62,11 +68,7 @@ export default createPiletTemplateFactory<VuePiletArgs>(root, (projectRoot, args
       name: 'tsconfig.json',
       target: '<root>/tsconfig.json',
     },
-    {
-      languages: ['ts', 'js'],
-      name: 'webpack.config.js',
-      target: '<root>/webpack.config.js',
-    },
+    ...getBundlerFiles(bundler, isSfc),
   ];
 
   if (args.vueVersion >= 3) {

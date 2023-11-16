@@ -1,0 +1,6 @@
+const vuePlugin = require('esbuild-vue');
+
+module.exports = function(config) {
+  config.plugins.push(vuePlugin());
+  return config;
+};

@@ -1,0 +1,5 @@
+const extendWebpack = require('<%- packageName %>/extend-webpack');
+
+module.exports = (config) => {
+  return extendWebpack()(config);
+};

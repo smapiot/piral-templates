@@ -1,7 +1,6 @@
 import { resolve } from 'path';
-import { createPiletTemplateFactory, getPiralInstance } from '@smapiot/template-utils';
+import { createPiletTemplateFactory, detectBundler, getPiralInstance } from '@smapiot/template-utils';
 import {
-  detectBundler,
   detectMode,
   detectSolidVersion,
   getBundlerFiles,

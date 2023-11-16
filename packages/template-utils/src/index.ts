@@ -1,3 +1,4 @@
+export * from './bundler';
 export * from './factory';
 export * from './log';
 export * from './template';
