@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.6 (tbd)
+## 1.0.6 (November 16, 2023)
 
 - Improved template for `piral-solid` to respect different bundlers
 
