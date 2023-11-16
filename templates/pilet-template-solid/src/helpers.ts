@@ -33,7 +33,9 @@ export function detectBundler(root: string) {
     const bundlers = ['esbuild', 'webpack5', 'webpack', 'vite', 'parcel2', 'parcel', 'bun'];
 
     for (const bundler of bundlers) {
-      if (bundler in devDependencies) {
+      const dependencyName = `piral-cli-${bundler}`;
+
+      if (dependencyName in devDependencies) {
         return bundler;
       }
     }
@@ -86,7 +88,7 @@ export function getBundlerFiles(bundler: string) {
     return bundlers[bundler];
   }
 
-  return {};
+  return [];
 }
 
 export function getBundlerDependencies(bundler: string, solidVersion: string) {
