@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.7 (tbd)
+## 1.0.7 (November 24, 2023)
 
 - Improved `angular` template with support for Angular 17
 - Improved `vue` template to respect different bundlers
