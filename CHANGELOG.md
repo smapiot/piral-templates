@@ -2,7 +2,9 @@
 
 ## 1.0.7 (tbd)
 
-- Improved template for `piral-vue` / `piral-vue3` to respect different bundlers
+- Improved `angular` template with support for Angular 17
+- Improved `vue` template to respect different bundlers
+- Updated default Angular version to 17
 - Added support for `piral-cli-vite` to the solid template
 - Added `detectBundler` helper to the `@smapiot/template-utils` package
 
