@@ -71,6 +71,7 @@ export function getStandardPackageJson(cliVersion: string, ngVersion: string, ma
   return {
     devDependencies: {
       '@angular/compiler-cli': ngVersion,
+      '@angular/cli': ngVersion,
       '@ngtools/webpack': ngVersion,
       'copy-webpack-plugin': '^10',
       'html-loader': '^3',

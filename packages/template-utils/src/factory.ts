@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve, basename } from 'path';
 import { mergeFiles } from './io';
 import { configure, ExecutionDetails } from './parent';
 import { getFileFromTemplate, normalizeData } from './template';
@@ -39,6 +39,7 @@ export function createPiletTemplateFactory<TExtra = {}>(
       plugins,
       projectRoot,
       root: '.',
+      piletName: basename(projectRoot),
       sourceName,
       extension: getLanguageExtension(language),
       src,

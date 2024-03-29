@@ -43,6 +43,11 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
     },
     {
       languages: ['ts', 'js'],
+      name: 'angular.json',
+      target: '<root>/angular.json',
+    },
+    {
+      languages: ['ts', 'js'],
       name: 'webpack.config.js',
       target: '<root>/webpack.config.js',
     },

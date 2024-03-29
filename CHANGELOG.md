@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.8 (tbd)
+
+- Added support for Angular CLI in `angular` template
+
 ## 1.0.7 (November 24, 2023)
 
 - Improved `angular` template with support for Angular 17
