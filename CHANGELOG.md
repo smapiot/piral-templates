@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.8 (tbd)
+## 1.0.8 (May 2, 2024)
 
 - Added support for Angular CLI in `angular` template
 
