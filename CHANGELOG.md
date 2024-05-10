@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.9 (tbd)
+
+- Changed `moduleResolution` in *tsconfig.json* to `Bundler`
+
 ## 1.0.8 (May 2, 2024)
 
 - Added support for Angular CLI in `angular` template
