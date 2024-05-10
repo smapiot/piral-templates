@@ -17,6 +17,15 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (_projectRoot,
     log('warn', `Angular version ${args.ngVersion} is not known and therefore not yet officially supported. It might not work.`);
   }
 
+  // parseInt actually ignores remains, e.g., 1.5.5-beta.27 will still be [1,5,5]; so we are fine here
+  const [major, minor, patch] = details.cliVersion.split('.').map(n => parseInt(n));
+
+  // test if we are "below" 1.5.5
+  if (major < 1 || (major === 1 && minor < 5) || (major === 1 && minor === 5 && patch < 5)) {
+    log('error', `Piral version ${details.cliVersion} is not supported. You need at least version 1.5.5.`);
+    throw new Error('Failed to apply template.');
+  }
+
   const ngVersion = `^${args.ngVersion}`;
   const packageJson = getPackageJson(details.cliVersion, ngVersion, args.ngVersion);
 
