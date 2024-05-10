@@ -3,6 +3,7 @@
 ## 1.0.9 (tbd)
 
 - Changed `moduleResolution` in *tsconfig.json* to `Bundler`
+- Added new template for standalone Angular (`ng-standalone`)
 
 ## 1.0.8 (May 2, 2024)
 

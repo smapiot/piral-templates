@@ -1,7 +1,7 @@
 {
-  "name": "@smapiot/pilet-template-empty",
+  "name": "@smapiot/pilet-template-ng-standalone",
   "version": "1.0.8",
-  "description": "Official scaffolding template for pilets: 'empty'.",
+  "description": "Official scaffolding template for pilets: 'ng-standalone'.",
   "keywords": [
     "piral-cli",
     "pilet",
@@ -16,12 +16,17 @@
     "node": ">=16.0",
     "piral": "1.x"
   },
-  "templateOptions": {},
+  "templateOptions": {
+    "ngVersion": {
+      "description": "Defines the (major) version of Angular to use.",
+      "default": 17,
+      "type": "number"
+    }
+  },
   "author": "smapiot",
   "homepage": "https://piral.io",
   "license": "MIT",
   "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
   "files": [
     "lib",
     "src",

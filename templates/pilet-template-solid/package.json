@@ -13,7 +13,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=12.0",
+    "node": ">=16.0",
     "piral": "1.x"
   },
   "templateOptions": {

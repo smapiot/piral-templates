@@ -1,0 +1,33 @@
+import 'core-js/proposals/reflect-metadata';
+import "zone.js";
+import { ApplicationConfig } from "@angular/core";
+import { provideRouter } from "@angular/router";
+import { createConverter } from 'piral-ng/standalone';
+import { PageComponent } from './app/page.component';
+<% if (plugins.menu) { -%>
+import { MenuComponent } from './app/menu.component';
+<% } -%>
+import type { PiletApi } from '<%- sourceName %>';
+
+const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter([
+      {
+        path: "",
+        children: [
+          { path: "sample", component: PageComponent },
+        ],
+      },
+    ]),
+  ],
+};
+
+export function setup(app: PiletApi) {
+  const fromNg = createConverter(appConfig);
+
+<% if (plugins.menu) { -%>
+  app.registerMenu(fromNg(MenuComponent));
+<% } -%>
+
+  app.registerPage('/sample', fromNg(PageComponent));
+}
