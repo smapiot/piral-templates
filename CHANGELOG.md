@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.9 (tbd)
+## 1.0.9 (May 10, 2024)
 
 - Changed `moduleResolution` in *tsconfig.json* to `Bundler`
 - Added new template for standalone Angular (`ng-standalone`)
