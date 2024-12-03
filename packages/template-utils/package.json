@@ -1,6 +1,6 @@
 {
   "name": "@smapiot/template-utils",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "The utility library for the official Piral templates.",
   "keywords": [
     "piral-cli",
