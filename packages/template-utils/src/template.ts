@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { renderFile } from 'ejs';
 import { log } from './log';
 import { makeRelative } from './utils';
-import { TemplateFile, TemplateSource } from './types';
+import type { TemplateFile, TemplateSource } from './types';
 
 const findVariable = /<(\w+)>/g;
 

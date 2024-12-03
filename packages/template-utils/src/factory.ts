@@ -1,9 +1,16 @@
 import { resolve, basename } from 'path';
 import { mergeFiles } from './io';
+import { getAssetsSource } from './assets';
 import { configure, ExecutionDetails } from './parent';
 import { getFileFromTemplate, normalizeData } from './template';
 import { getLanguageExtension, getPackageJsonWithSource, getPlugins } from './utils';
-import { PiralTemplateArgs, PiletTemplateArgs, TemplateFile, PiletTemplateSource, PiralTemplateSource } from './types';
+import type {
+  PiralTemplateArgs,
+  PiletTemplateArgs,
+  TemplateFile,
+  PiletTemplateSource,
+  PiralTemplateSource,
+} from './types';
 
 export interface GetAllSources<TArgs, TSource> {
   (projectRoot: string, args: TArgs, details: ExecutionDetails): Array<TSource>;
@@ -32,7 +39,6 @@ export function createPiletTemplateFactory<TExtra = {}>(
       mocks = '<src>/mocks',
     } = allArgs;
     const allSources = getAllSources(projectRoot, allArgs, details);
-    const sources = allSources.filter((m) => m.languages.includes(language));
     const data = normalizeData({
       ...allArgs,
       language,
@@ -45,12 +51,13 @@ export function createPiletTemplateFactory<TExtra = {}>(
       src,
       mocks,
     });
-    const defaultSource = getPackageJsonWithSource(data.projectRoot, data.src, `index${data.extension}`);
+    const defaultSources = [
+      getAssetsSource(),
+      getPackageJsonWithSource(data.projectRoot, data.src, `index${data.extension}`),
+    ];
 
-    const files = await Promise.all(
-      [...sources, defaultSource].map((source) => getFileFromTemplate(sourceDir, source, data)),
-    );
-
+    const sources = [...allSources, ...defaultSources].filter((m) => m.languages.includes(language));
+    const files = await Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
     return mergeFiles(files);
   };
 }
@@ -80,7 +87,6 @@ export function createPiralTemplateFactory<TExtra = {}>(
       plugins = [],
     } = allArgs;
     const allSources = getAllSources(projectRoot, allArgs, details);
-    const sources = allSources.filter((m) => m.languages.includes(language) && m.frameworks.includes(packageName));
     const data = normalizeData({
       ...allArgs,
       title,
@@ -95,8 +101,10 @@ export function createPiralTemplateFactory<TExtra = {}>(
       mocks,
     });
 
+    const defaultSources = [getAssetsSource()];
+    const customSources = allSources.filter((m) => m.frameworks.includes(packageName));
+    const sources = [...customSources, ...defaultSources].filter((m) => m.languages.includes(language));
     const files = await Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
-
     return mergeFiles(files);
   };
 }

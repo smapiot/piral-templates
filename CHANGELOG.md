@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.10 (tbd)
+
+- Added *assets.d.ts* for TypeScript projects
+
 ## 1.0.9 (May 10, 2024)
 
 - Changed `moduleResolution` in *tsconfig.json* to `Bundler`

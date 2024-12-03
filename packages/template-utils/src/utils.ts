@@ -1,7 +1,7 @@
 import { posix, resolve, dirname, relative, isAbsolute, sep } from 'path';
 import { readFileSync } from 'fs';
 import { log } from './log';
-import { TemplateSource } from './types';
+import type { TemplateSource } from './types';
 
 export function makeRelative(path: string, root: string) {
   const relPath = isAbsolute(path) ? relative(root, path) : path;

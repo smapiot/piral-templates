@@ -1,5 +1,5 @@
 import { deepMerge } from './merge';
-import { TemplateFile } from './types';
+import type { TemplateFile } from './types';
 
 export function mergeFiles(files: Array<TemplateFile>) {
   const result: Record<string, Array<TemplateFile>> = {};
