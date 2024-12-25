@@ -12,7 +12,7 @@ The official templates for Piral Instances and pilets.
 * 🉐 **Help translating Piral!** - making PRs in the [documentation branch](https://github.com/smapiot/piral/tree/documentation)
 * 🐞 [Issue Tracker](https://github.com/smapiot/piral/issues) - report bugs or suggest new features
 * 🗨 [Forums](https://stackoverflow.com/questions/tagged/piral) - use the community support on StackOverflow
-* 👪 [Community Chat](https://gitter.im/piral-io/community) - ask questions and provide answers in our Gitter room
+* 👪 [Community Chat](https://discord.gg/kKJ2FZmK8t) - ask questions and provide answers in our Gitter room
 
 ## Available Piral Instance Templates
 
@@ -31,4 +31,4 @@ The official templates for Piral Instances and pilets.
 
 ## License
 
-This code is released using the MIT license. For more information see the [LICENSE file](LICENSE).
+This code is released using the MIT license. For more information see the [LICENSE file](./LICENSE).

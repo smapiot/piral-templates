@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.11 (tbd)
+
+- Added *.codegen* files to the assets declaration
+
 ## 1.0.10 (December 3, 2024)
 
 - Added *assets.d.ts* for TypeScript projects

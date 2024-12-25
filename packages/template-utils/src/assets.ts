@@ -52,6 +52,7 @@ declare module '*.gif' {
   const link: string;
   export default link;
 }
+declare module '*.codegen';
 `;
 
 export function getAssetsSource(): TemplateSource {
