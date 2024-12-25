@@ -1,6 +1,6 @@
 {
   "name": "@smapiot/pilet-template-ng-standalone",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Official scaffolding template for pilets: 'ng-standalone'.",
   "keywords": [
     "piral-cli",
@@ -49,6 +49,6 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "@smapiot/template-utils": "^1.0.10"
+    "@smapiot/template-utils": "^1.0.11"
   }
 }
