@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.11 (tbd)
+## 1.0.11 (December 25, 2024)
 
 - Added *.codegen* files to the assets declaration
 
