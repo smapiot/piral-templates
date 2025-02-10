@@ -12,6 +12,8 @@ import type {
   PiralTemplateSource,
 } from './types';
 
+const mergePackageJson = [/package\.json$/];
+
 export interface GetAllSources<TArgs, TSource> {
   (projectRoot: string, args: TArgs, details: ExecutionDetails): Array<TSource>;
 }
@@ -20,6 +22,7 @@ export function createPiletTemplateFactory<TExtra = {}>(
   templateRoot: string,
   getAllSources: GetAllSources<PiletTemplateArgs & Partial<TExtra>, PiletTemplateSource>,
   defaultArgs: Partial<PiletTemplateArgs & TExtra> = {},
+  deepMerged: Array<string | RegExp> = mergePackageJson,
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
@@ -58,7 +61,7 @@ export function createPiletTemplateFactory<TExtra = {}>(
 
     const sources = [...allSources, ...defaultSources].filter((m) => m.languages.includes(language));
     const files = await Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
-    return mergeFiles(files);
+    return mergeFiles(files, deepMerged);
   };
 }
 
@@ -66,6 +69,7 @@ export function createPiralTemplateFactory<TExtra = {}>(
   templateRoot: string,
   getAllSources: GetAllSources<PiralTemplateArgs & Partial<TExtra>, PiralTemplateSource>,
   defaultArgs: Partial<PiralTemplateArgs & TExtra> = {},
+  deepMerged: Array<string | RegExp> = mergePackageJson,
 ) {
   const sourceDir = resolve(templateRoot, 'templates');
 
@@ -105,6 +109,6 @@ export function createPiralTemplateFactory<TExtra = {}>(
     const customSources = allSources.filter((m) => m.frameworks.includes(packageName));
     const sources = [...customSources, ...defaultSources].filter((m) => m.languages.includes(language));
     const files = await Promise.all(sources.map((source) => getFileFromTemplate(sourceDir, source, data)));
-    return mergeFiles(files);
+    return mergeFiles(files, deepMerged);
   };
 }

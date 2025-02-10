@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.12 (tbd)
+
+- Added override switch to utils (#2)
+
 ## 1.0.11 (December 25, 2024)
 
 - Added *.codegen* files to the assets declaration
