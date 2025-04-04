@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.12 (tbd)
+## 1.0.12 (April 4, 2025)
 
 - Improved `angular` template with support for Angular 18
 - Improved `angular` template with support for Angular 19
