@@ -2,6 +2,8 @@
 
 ## 1.0.12 (tbd)
 
+- Improved `angular` template with support for Angular 18
+- Improved `angular` template with support for Angular 19
 - Added override switch to utils (#2)
 
 ## 1.0.11 (December 25, 2024)
