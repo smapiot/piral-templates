@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.13 (tbd)
+## 1.0.13 (April 11, 2025)
 
 - Added option `ngStandalone` to the `angular` template
 
