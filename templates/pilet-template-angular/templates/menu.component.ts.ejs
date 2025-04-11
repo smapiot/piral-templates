@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+<% if (ngVersion > 16) { -%>
+  standalone: <%= ngStandalone %>,
+<% } -%>
   styleUrls: [],
   templateUrl: './menu.component.html'
 })

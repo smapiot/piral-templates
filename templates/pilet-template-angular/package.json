@@ -22,6 +22,11 @@
       "default": false,
       "type": "boolean"
     },
+    "ngStandalone": {
+      "description": "Defines if Angular should be used with standalone components (17+).",
+      "default": false,
+      "type": "boolean"
+    },
     "ngVersion": {
       "description": "Defines the (major) version of Angular to use in case of a standalone pilet.",
       "default": 17,
