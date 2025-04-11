@@ -1,19 +1,20 @@
 import 'core-js/proposals/reflect-metadata';
 import { createConverter } from 'piral-ng/standalone';
-import type { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideExperimentalZonelessChangeDetection, type ApplicationConfig } from '@angular/core';
 import type { PiletApi } from '<%- sourceName %>';
 <% if (plugins.menu) { -%>
 import { MenuComponent } from './app/menu.component';
 <% } -%>
-
 import { PageComponent } from './app/page.component';
 
 const appConfig: ApplicationConfig = {
   providers: [
+    provideExperimentalZonelessChangeDetection(),
     provideRouter([
       {
         path: "sample",
-        component: AngularPage,
+        component: PageComponent,
       },
     ]),
   ],

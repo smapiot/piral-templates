@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+<% if (ngStandalone) { -%>
+import { RouterLink } from '@angular/router';
+<% } -%>
 
 @Component({
 <% if (ngVersion > 16) { -%>
   standalone: <%= ngStandalone %>,
+<% } -%>
+<% if (ngStandalone) { -%>
+  imports: [RouterLink],
 <% } -%>
   styleUrls: [],
   templateUrl: './menu.component.html'
