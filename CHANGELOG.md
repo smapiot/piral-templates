@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.14 (tbd)
+## 1.0.14 (April 14, 2025)
 
 - Fixed issue with undefined `ngStandalone` option in the `angular` template
 - Updated `ng-standalone` template to behave like `angular` template with `ngStandalone` option
