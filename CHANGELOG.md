@@ -1,5 +1,12 @@
 # Piral Templates Changelog
 
+## 1.0.14 (tbd)
+
+- Fixed issue with undefined `ngStandalone` option in the `angular` template
+- Updated `ng-standalone` template to behave like `angular` template with `ngStandalone` option
+- Updated `angular` and `ng-standalone` templates to use Angular 18 by default
+- Added `blazor` template for pilets
+
 ## 1.0.13 (April 11, 2025)
 
 - Added option `ngStandalone` to the `angular` template

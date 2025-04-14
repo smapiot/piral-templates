@@ -44,7 +44,7 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
   }
 
   if (typeof args.ngStandalone === 'undefined') {
-    args.standalone = args.ngVersion > 18;
+    args.ngStandalone = args.ngVersion > 18;
   }
 
   const ngVersion = `^${args.ngVersion}`;

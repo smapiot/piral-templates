@@ -1,7 +1,7 @@
 import 'core-js/proposals/reflect-metadata';
-import "zone.js";
-import { ApplicationConfig } from "@angular/core";
-import { provideRouter } from "@angular/router";
+import 'zone.js';
+import type { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { createConverter } from 'piral-ng/standalone';
 import { PageComponent } from './app/page.component';
 <% if (plugins.menu) { -%>
@@ -13,9 +13,9 @@ const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([
       {
-        path: "",
+        path: '',
         children: [
-          { path: "sample", component: PageComponent },
+          { path: 'sample', component: PageComponent },
         ],
       },
     ]),

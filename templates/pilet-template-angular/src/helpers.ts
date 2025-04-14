@@ -11,7 +11,7 @@ export function detectNgVersion(piralInstance: { details: any }) {
   const dependencies = piralInstance?.details?.dependencies || {};
   const devDependencies = piralInstance?.details?.devDependencies || {};
   const allDependencies = { ...devDependencies, ...dependencies };
-  const version = allDependencies['@angular/core'] || '17.0.0';
+  const version = allDependencies['@angular/core'] || '18.0.0';
 
   if (typeof version === 'string') {
     const result = /\d+/.exec(version);
@@ -22,7 +22,7 @@ export function detectNgVersion(piralInstance: { details: any }) {
     }
   }
 
-  return 17;
+  return 18;
 }
 
 export function isKnownVersion(majorNgVersion: number) {
@@ -51,9 +51,9 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string, 
       '@angular/router': ngVersion,
       'piral-ng': cliVersion,
       'piral-ng-common': ngVersion,
-      'core-js': '^3.19.0',
+      'core-js': '^3',
       rxjs: rxjsVersions[majorNgVersion] || '^7.4',
-      'zone.js': zoneVersions[majorNgVersion] || '^0.13',
+      'zone.js': zoneVersions[majorNgVersion] || '^0.14',
     },
     devDependencies: {
       '@angular/compiler-cli': ngVersion,

@@ -14,6 +14,7 @@ export function getPackageJson(cliVersion: string, ngVersion: string, majorNgVer
         '@angular/platform-browser': '',
         '@angular/platform-browser-dynamic': '',
         '@angular/router': '',
+        'piral-ng-common': '',
       },
     },
     dependencies: {
@@ -24,7 +25,8 @@ export function getPackageJson(cliVersion: string, ngVersion: string, majorNgVer
       '@angular/platform-browser-dynamic': ngVersion,
       '@angular/router': ngVersion,
       'piral-ng': cliVersion,
-      'core-js': '^3.19.0',
+      'piral-ng-common': ngVersion,
+      'core-js': '^3',
       rxjs: rxjsVersions[majorNgVersion] || '^7.4',
       'zone.js': zoneVersions[majorNgVersion] || '^0.14',
     },

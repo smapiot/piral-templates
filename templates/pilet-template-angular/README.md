@@ -31,7 +31,7 @@ For this template we have:
 
 - **src**: Sets the directory of the source files. By default it's `<root>/src`.
 - **standalone**: Sets if the pilet should be considered standalone, i.e., with Angular provided by the pilet. By default, this is derived from inspecting the used Piral instance (if it contains `piral-ng` then `standalone` would be set to `false`)
-- **ngVersion**: Sets the (major) version of Angular to be used in case of a standalone pilet. Otherwise, would be discarded.
+- **ngVersion**: Sets the (major) version of Angular to be used in case of a standalone pilet. Otherwise, would be discarded. By default, Angular 18 is used.
 - **ngStandalone**: Sets if the Angular components should be configured as standalone in the `@Component` directive. By default, for Angular 19+ this is set to `true`. Otherwise, it will be set to `false`.
 
 ## License
