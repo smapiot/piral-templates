@@ -1,6 +1,6 @@
 {
   "name": "@smapiot/template-utils",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "The utility library for the official Piral templates.",
   "keywords": [
     "piral-cli",
@@ -40,9 +40,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "@types/ejs": "^2.6.3"
+    "@types/ejs": "^2"
   },
   "dependencies": {
-    "ejs": "^2.6.2"
+    "ejs": "^2"
   }
 }
