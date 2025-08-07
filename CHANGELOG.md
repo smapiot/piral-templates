@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.16 (tbd)
+
+- Fixed syntax error in `@smapiot/pilet-template-ng-standalone` (#4) by @pranav-hsg
+
 ## 1.0.15 (June 2, 2025)
 
 - Improved `angular` template with support for Angular 20
