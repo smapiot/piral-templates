@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.16 (tbd)
+## 1.0.16 (August 7, 2025)
 
 - Fixed syntax error in `@smapiot/pilet-template-ng-standalone` (#4) by @pranav-hsg
 
