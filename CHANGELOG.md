@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.15 (tbd)
+## 1.0.15 (June 2, 2025)
 
 - Improved `angular` template with support for Angular 20
 
