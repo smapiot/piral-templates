@@ -72,6 +72,7 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string, 
 
 export function getStandardPackageJson(cliVersion: string, ngVersion: string, majorNgVersion: number) {
   return {
+    dependencies: {},
     devDependencies: {
       '@angular/compiler-cli': ngVersion,
       '@angular/cli': ngVersion,

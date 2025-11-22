@@ -29,7 +29,7 @@
     },
     "ngVersion": {
       "description": "Defines the (major) version of Angular to use in case of a standalone pilet.",
-      "default": 18,
+      "default": 20,
       "type": "number"
     }
   },

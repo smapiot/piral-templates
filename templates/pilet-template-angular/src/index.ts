@@ -14,6 +14,7 @@ interface AngularPiletArgs {
   standalone: boolean;
   ngVersion: number;
   ngStandalone: boolean;
+  withZone?: boolean;
 }
 
 export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, args, details) => {
@@ -51,6 +52,8 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
   const packageJson = args.standalone
     ? getStandalonePackageJson(details.cliVersion, ngVersion, args.ngVersion)
     : getStandardPackageJson(details.cliVersion, ngVersion, args.ngVersion);
+
+  args.withZone = 'zone.js' in packageJson.dependencies;
 
   const templates: Array<PiletTemplateSource> = [
     {
@@ -107,13 +110,11 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
   ];
 
   if (args.ngStandalone) {
-    templates.push(
-      {
-        languages: ['ts'],
-        name: 'index.standalone.tsx',
-        target: '<src>/index.tsx',
-      },
-    );
+    templates.push({
+      languages: ['ts'],
+      name: 'index.standalone.tsx',
+      target: '<src>/index.tsx',
+    });
   } else {
     templates.push(
       {

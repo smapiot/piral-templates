@@ -19,7 +19,7 @@
   "templateOptions": {
     "ngVersion": {
       "description": "Defines the (major) version of Angular to use.",
-      "default": 18,
+      "default": 20,
       "type": "number"
     }
   },

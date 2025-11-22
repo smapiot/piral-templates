@@ -7,6 +7,7 @@ const root = resolve(__dirname, '..');
 interface AngularPiletArgs {
   standalone: boolean;
   ngVersion: number;
+  withZone?: boolean;
 }
 
 export default createPiletTemplateFactory<AngularPiletArgs>(root, (_projectRoot, args, details) => {
@@ -28,6 +29,7 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (_projectRoot,
 
   const ngVersion = `^${args.ngVersion}`;
   const packageJson = getPackageJson(details.cliVersion, ngVersion, args.ngVersion);
+  args.withZone = 'zone.js' in packageJson.dependencies;
 
   return [
     {
