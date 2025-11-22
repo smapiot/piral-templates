@@ -5,6 +5,9 @@ export function isKnownVersion(majorNgVersion: number) {
 }
 
 export function getPackageJson(cliVersion: string, ngVersion: string, majorNgVersion: number) {
+  const zoneVersion = zoneVersions[majorNgVersion];
+  const extraDeps = typeof zoneVersion === 'string' ? { 'zone.js': zoneVersion } : {};
+
   return {
     importmap: {
       imports: {
@@ -28,7 +31,7 @@ export function getPackageJson(cliVersion: string, ngVersion: string, majorNgVer
       'piral-ng-common': ngVersion,
       'core-js': '^3',
       rxjs: rxjsVersions[majorNgVersion] || '^7.4',
-      'zone.js': zoneVersions[majorNgVersion] || '^0.14',
+      ...extraDeps,
     },
     devDependencies: {
       '@angular/compiler-cli': ngVersion,

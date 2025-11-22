@@ -11,7 +11,7 @@ export function detectNgVersion(piralInstance: { details: any }) {
   const dependencies = piralInstance?.details?.dependencies || {};
   const devDependencies = piralInstance?.details?.devDependencies || {};
   const allDependencies = { ...devDependencies, ...dependencies };
-  const version = allDependencies['@angular/core'] || '18.0.0';
+  const version = allDependencies['@angular/core'] || '20.0.0';
 
   if (typeof version === 'string') {
     const result = /\d+/.exec(version);
@@ -30,6 +30,9 @@ export function isKnownVersion(majorNgVersion: number) {
 }
 
 export function getStandalonePackageJson(cliVersion: string, ngVersion: string, majorNgVersion: number) {
+  const zoneVersion = zoneVersions[majorNgVersion];
+  const extraDeps = typeof zoneVersion === 'string' ? { 'zone.js': zoneVersion } : {};
+
   return {
     importmap: {
       imports: {
@@ -53,7 +56,7 @@ export function getStandalonePackageJson(cliVersion: string, ngVersion: string, 
       'piral-ng-common': ngVersion,
       'core-js': '^3',
       rxjs: rxjsVersions[majorNgVersion] || '^7.4',
-      'zone.js': zoneVersions[majorNgVersion] || '^0.14',
+      ...extraDeps,
     },
     devDependencies: {
       '@angular/compiler-cli': ngVersion,

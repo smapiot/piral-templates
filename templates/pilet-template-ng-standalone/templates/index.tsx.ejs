@@ -1,5 +1,7 @@
 import 'core-js/proposals/reflect-metadata';
+<% if (withZone) { -%>
 import 'zone.js';
+<% } -%>
 import type { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { createConverter } from 'piral-ng/standalone';
