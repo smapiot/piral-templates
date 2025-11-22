@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.17 (tbd)
+## 1.0.17 (November 22, 2025)
 
 - Updated `angular` and `ng-standalone` templates to use Angular 20 by default
 - Added support for Angular 21
