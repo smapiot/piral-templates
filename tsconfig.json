@@ -12,6 +12,7 @@
     "skipLibCheck": true,
     "target": "es6",
     "sourceMap": true,
+    "rootDir": ".",
     "lib": ["es6", "dom", "esnext"]
   },
   "exclude": [
