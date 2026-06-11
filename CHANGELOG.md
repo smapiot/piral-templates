@@ -4,6 +4,7 @@
 
 - Updated *tsconfig.json* with required `rootDir` option (TypeScript 6)
 - Updated `angular` and `ng-standalone` templates to Angular 22 support
+- Updated to use NPM provenance publishing
 
 ## 1.0.17 (November 22, 2025)
 
