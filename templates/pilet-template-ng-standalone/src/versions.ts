@@ -5,6 +5,7 @@ export const tsVersions = {
   19: '~5.7',
   20: '~5.8',
   21: '~5.9',
+  22: '~6.0',
 };
 
 // Mapping of Angular to RxJs versions
@@ -14,6 +15,7 @@ export const rxjsVersions = {
   19: '^7.4',
   20: '^7.4',
   21: '^7.4',
+  22: '^7.4',
 };
 
 // Mapping of Angular to Zone.js versions
@@ -22,5 +24,6 @@ export const zoneVersions = {
   18: '~0.14',
   19: '~0.15',
   20: '~0.15',
-  21: false
+  21: false,
+  22: false,
 };
