@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.18 (tbd)
+## 1.0.18 (June 11, 2026)
 
 - Updated *tsconfig.json* with required `rootDir` option (TypeScript 6)
 - Updated `angular` and `ng-standalone` templates to Angular 22 support
