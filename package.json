@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/node": "^22",
     "esbuild": "^0.27",
-    "lerna": "^8",
+    "lerna": "^9",
     "prettier": "^3",
     "tslint": "^5",
     "tslint-config-prettier": "^1",
