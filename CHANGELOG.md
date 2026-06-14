@@ -1,6 +1,6 @@
 # Piral Templates Changelog
 
-## 1.0.19 (tbd)
+## 1.0.19 (June 14, 2026)
 
 - Added optional `AGENTS.md` to all non-empty templates
 
