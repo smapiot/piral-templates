@@ -15,10 +15,11 @@ interface AngularPiletArgs {
   ngVersion: number;
   ngStandalone: boolean;
   withZone?: boolean;
+  agents?: boolean;
 }
 
 export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, args, details) => {
-  const { sourceName } = args;
+  const { sourceName, agents } = args;
   const piralInstance = getPiralInstance(projectRoot, sourceName);
 
   if (typeof args.standalone === 'undefined') {
@@ -108,6 +109,14 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (projectRoot, 
       target: '<root>/tsconfig.json',
     },
   ];
+
+  if (agents) {
+    templates.push({
+      languages: ['js', 'ts'],
+      name: 'AGENTS.md',
+      target: '<root>/AGENTS.md',
+    });
+  }
 
   if (args.ngStandalone) {
     templates.push({

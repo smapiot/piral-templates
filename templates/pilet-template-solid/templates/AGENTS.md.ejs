@@ -1,0 +1,39 @@
+# Micro Frontend project rules (for AI assistants)
+
+> Generated when this pilet was scaffolded. Most assistants read AGENTS.md
+> (Cursor/Claude), .cursorrules, or .github/copilot-instructions.md — copy or
+> symlink as needed. Keep this in sync with the app shell's real capabilities.
+
+This repository is the pilet **<%- piletName %>**, built with Piral (React micro
+frontends). It uses Solid.js to declare and expose components and primarely targets
+the app shell **<%- sourceName %>**.
+
+## Contract
+
+- App shell package: `<%- sourceName %>`. Import the Pilet API as:
+  `import type { PiletApi } from '<%- sourceName %>'`.
+- Installed Pilet API plugins — only these methods exist: <%- (typeof plugins !== 'undefined' && plugins && plugins.length) ? plugins.join(', ') : 'see the app shell package.json' %>.
+- Centrally shared externals (provided by the shell — never bundle, never import a
+  different version): `react`, `react-dom`, and anything else the shell declares in
+  its `importmap` (e.g. `react-router-dom`, a design system).
+- Extension slots: list the slot names (and their `params`) your app shell and other pilets expose.
+
+## Conventions
+
+- A pilet's only entry is a single exported `setup(api: PiletApi)` function.
+  Register pages, menus, and extensions there.
+- Only call Pilet API methods provided by the plugins listed above. Do not invent methods.
+- Never install `piral-cli` globally; never use `pilet new` or `piral new`. Run the
+  CLI via npm scripts or `npx` (`npx pilet debug | build | publish`).
+- Share libraries via the `importmap` in `package.json`; treat the externals above
+  as provided by the shell.
+- Pilets must not import each other. Compose UI via extension slots; share data via
+  events or the shared data store.
+- Registrations are cleaned up automatically on unload/hot-reload; only call
+  `unregister*` for genuinely dynamic cases.
+- Prefer `piral-core` over `piral` for long-lived shells (same API, explicit plugins).
+- Write tests with Vitest by unit-testing `setup()` with a mock `PiletApi`.
+
+## Docs
+
+- Piral documentation: https://docs.piral.io

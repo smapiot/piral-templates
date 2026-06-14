@@ -31,6 +31,11 @@
       "description": "Defines the title for the sample page.",
       "default": "Title",
       "type": "string"
+    },
+    "agents": {
+      "description": "Generate an AGENTS.md rules file for AI assistants.",
+      "default": true,
+      "type": "boolean"
     }
   },
   "author": "smapiot",

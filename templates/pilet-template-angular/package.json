@@ -31,6 +31,11 @@
       "description": "Defines the (major) version of Angular to use in case of a standalone pilet.",
       "default": 20,
       "type": "number"
+    },
+    "agents": {
+      "description": "Generate an AGENTS.md rules file for AI assistants.",
+      "default": true,
+      "type": "boolean"
     }
   },
   "author": "smapiot",

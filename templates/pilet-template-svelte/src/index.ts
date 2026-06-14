@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { createPiletTemplateFactory, getPiralInstance } from '@smapiot/template-utils';
+import { createPiletTemplateFactory, getPiralInstance, PiletTemplateSource } from '@smapiot/template-utils';
 import { detectMode, detectSvelteVersion, getStandalonePackageJson, getStandardPackageJson } from './helpers';
 
 const root = resolve(__dirname, '..');
@@ -8,10 +8,11 @@ interface SveltePiletArgs {
   title: string;
   standalone: boolean;
   svelteVersion: number;
+  agents: boolean;
 }
 
 export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, args, details) => {
-  const { sourceName } = args;
+  const { sourceName, agents } = args;
   const piralInstance = getPiralInstance(projectRoot, sourceName);
 
   if (typeof args.standalone === 'undefined') {
@@ -29,7 +30,7 @@ export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, a
     ? getStandalonePackageJson(details.cliVersion, svelteVersion)
     : getStandardPackageJson(details.cliVersion, svelteVersion);
 
-  return [
+  const sources: Array<PiletTemplateSource> = [
     {
       languages: ['ts', 'js'],
       name: 'package.json',
@@ -62,4 +63,14 @@ export default createPiletTemplateFactory<SveltePiletArgs>(root, (projectRoot, a
       target: '<root>/tsconfig.json',
     },
   ];
+
+  if (agents) {
+    sources.push({
+      languages: ['js', 'ts'],
+      name: 'AGENTS.md',
+      target: '<root>/AGENTS.md',
+    });
+  }
+
+  return sources;
 });

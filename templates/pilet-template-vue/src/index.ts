@@ -5,7 +5,13 @@ import {
   getPiralInstance,
   PiletTemplateSource,
 } from '@smapiot/template-utils';
-import { detectMode, detectVueVersion, getBundlerFiles, getStandalonePackageJson, getStandardPackageJson } from './helpers';
+import {
+  detectMode,
+  detectVueVersion,
+  getBundlerFiles,
+  getStandalonePackageJson,
+  getStandardPackageJson,
+} from './helpers';
 
 const root = resolve(__dirname, '..');
 
@@ -15,10 +21,11 @@ interface VuePiletArgs {
   packageName: string;
   standalone: boolean;
   vueVersion: number;
+  agents: boolean;
 }
 
 export default createPiletTemplateFactory<VuePiletArgs>(root, (projectRoot, args, details) => {
-  const { sourceName } = args;
+  const { sourceName, agents } = args;
   const piralInstance = getPiralInstance(projectRoot, sourceName);
 
   if (typeof args.standalone === 'undefined') {
@@ -70,6 +77,14 @@ export default createPiletTemplateFactory<VuePiletArgs>(root, (projectRoot, args
     },
     ...getBundlerFiles(bundler, isSfc),
   ];
+
+  if (agents) {
+    files.push({
+      languages: ['js', 'ts'],
+      name: 'AGENTS.md',
+      target: '<root>/AGENTS.md',
+    });
+  }
 
   if (args.vueVersion >= 3) {
     files.push({

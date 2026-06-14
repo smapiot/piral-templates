@@ -1,0 +1,45 @@
+# Piral app shell rules (for AI assistants)
+
+> Generated when this Piral instance was scaffolded. Most assistants read
+> AGENTS.md (Cursor/Claude), .cursorrules, or .github/copilot-instructions.md.
+> Keep this in sync as you add or remove plugins and shared dependencies.
+
+This repository is the Piral **app shell** `<%- packageName %>` (built on
+`<%- framework %>`). It is the host that loads and composes pilets at runtime.
+
+## The contract this shell exposes to pilets
+
+- Pilets target this shell by name and import the typed API as:
+  `import type { PiletApi } from '<%- packageName %>'`.
+- Pilet API plugins installed here (these define the methods pilets may call):
+  <%- (plugins && plugins.length) ? plugins.join(', ') : 'none yet — add plugins to createInstance and list them here' %>.
+- Centrally shared externals come from this package's `importmap` in `package.json`
+  (typically `react`, `react-dom`, and e.g. `react-router-dom` or a design system).
+  Pilets treat these as provided by the shell — keep the importmap accurate.
+- Document the extension slot names (and their `params`) this shell renders, so
+  pilet authors know what they can fill.
+
+## Conventions
+
+- Keep the shell thin: layout, auth, routing, shared runtime, extension registry.
+  Feature logic belongs in pilets, not here.
+- Configure the runtime via `createInstance` from `<%- framework %>`.
+<% if (framework === 'piral') { -%>
+- This shell uses `piral` (batteries-included). For the long run, consider moving to
+  `piral-core` and registering plugins explicitly.
+<% } else if (framework === 'piral-core') { -%>
+- This shell uses `piral-core`: every plugin is registered explicitly in
+  `createInstance({ plugins: [...] })`. Keep the plugin list above in sync with it.
+<% } else { -%>
+- This shell uses `piral-base` (the low-level, framework-agnostic loader). There is
+  no React runtime or standard Pilet API here unless you add one on top.
+<% } -%>
+- Don't hardcode a pilet list — that's the feed service's job; the shell only knows
+  the feed URL. Don't define feature routes in the shell; pilets register their own.
+- Scaffold with `npm init piral-instance`; run the CLI via npm scripts or `npx`
+  (`npx piral debug | build`). Never install `piral-cli` globally.
+- Target React version: <%- reactVersion %>.
+
+## Docs
+
+- Piral documentation: https://docs.piral.io

@@ -1,5 +1,9 @@
 # Piral Templates Changelog
 
+## 1.0.19 (tbd)
+
+- Added optional `AGENTS.md` to all non-empty templates
+
 ## 1.0.18 (June 11, 2026)
 
 - Updated *tsconfig.json* with required `rootDir` option (TypeScript 6)

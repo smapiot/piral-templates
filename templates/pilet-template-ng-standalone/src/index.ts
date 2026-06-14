@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { createPiletTemplateFactory, log } from '@smapiot/template-utils';
+import { createPiletTemplateFactory, log, PiletTemplateSource } from '@smapiot/template-utils';
 import { getPackageJson, isKnownVersion } from './helpers';
 
 const root = resolve(__dirname, '..');
@@ -8,18 +8,22 @@ interface AngularPiletArgs {
   standalone: boolean;
   ngVersion: number;
   withZone?: boolean;
+  agents: boolean;
 }
 
 export default createPiletTemplateFactory<AngularPiletArgs>(root, (_projectRoot, args, details) => {
-  if (args.ngVersion < 17) {
+  if (args.ngVersion! < 17) {
     log('error', `Angular version ${args.ngVersion} is not supported. Minimum version is 17.`);
     throw new Error('Failed to apply template.');
-  } else if (!isKnownVersion(args.ngVersion)) {
-    log('warn', `Angular version ${args.ngVersion} is not known and therefore not yet officially supported. It might not work.`);
+  } else if (!isKnownVersion(args.ngVersion!)) {
+    log(
+      'warn',
+      `Angular version ${args.ngVersion} is not known and therefore not yet officially supported. It might not work.`,
+    );
   }
 
   // parseInt actually ignores remains, e.g., 1.5.5-beta.27 will still be [1,5,5]; so we are fine here
-  const [major, minor, patch] = details.cliVersion.split('.').map(n => parseInt(n));
+  const [major, minor, patch] = details.cliVersion.split('.').map((n) => parseInt(n));
 
   // test if we are "below" 1.5.5
   if (major < 1 || (major === 1 && minor < 5) || (major === 1 && minor === 5 && patch < 5)) {
@@ -28,10 +32,10 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (_projectRoot,
   }
 
   const ngVersion = `^${args.ngVersion}`;
-  const packageJson = getPackageJson(details.cliVersion, ngVersion, args.ngVersion);
+  const packageJson = getPackageJson(details.cliVersion, ngVersion, args.ngVersion!);
   args.withZone = 'zone.js' in packageJson.dependencies;
 
-  return [
+  const sources: Array<PiletTemplateSource> = [
     {
       languages: ['ts', 'js'],
       name: 'package.json',
@@ -89,4 +93,14 @@ export default createPiletTemplateFactory<AngularPiletArgs>(root, (_projectRoot,
       target: '<root>/tsconfig.json',
     },
   ];
+
+  if (args.agents) {
+    sources.push({
+      languages: ['js', 'ts'],
+      name: 'AGENTS.md',
+      target: '<root>/AGENTS.md',
+    });
+  }
+
+  return sources;
 });

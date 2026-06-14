@@ -1,5 +1,10 @@
 import { resolve } from 'path';
-import { createPiletTemplateFactory, detectBundler, getPiralInstance } from '@smapiot/template-utils';
+import {
+  createPiletTemplateFactory,
+  detectBundler,
+  getPiralInstance,
+  PiletTemplateSource,
+} from '@smapiot/template-utils';
 import {
   detectMode,
   detectSolidVersion,
@@ -14,10 +19,11 @@ interface SolidPiletArgs {
   title: string;
   standalone: boolean;
   solidVersion: number;
+  agents: boolean;
 }
 
 export default createPiletTemplateFactory<SolidPiletArgs>(root, (projectRoot, args, details) => {
-  const { sourceName } = args;
+  const { sourceName, agents } = args;
   const piralInstance = getPiralInstance(projectRoot, sourceName);
 
   if (typeof args.standalone === 'undefined') {
@@ -36,7 +42,7 @@ export default createPiletTemplateFactory<SolidPiletArgs>(root, (projectRoot, ar
     ? getStandalonePackageJson(bundler, details.cliVersion, solidVersion)
     : getStandardPackageJson(bundler, details.cliVersion, solidVersion);
 
-  return [
+  const sources: Array<PiletTemplateSource> = [
     {
       languages: ['ts', 'js'],
       name: 'package.json',
@@ -70,4 +76,14 @@ export default createPiletTemplateFactory<SolidPiletArgs>(root, (projectRoot, ar
     },
     ...getBundlerFiles(bundler),
   ];
+
+  if (agents) {
+    sources.push({
+      languages: ['js', 'ts'],
+      name: 'AGENTS.md',
+      target: '<root>/AGENTS.md',
+    });
+  }
+
+  return sources;
 });

@@ -26,6 +26,11 @@
       "description": "Defines the URL to use for requesting the pilets.",
       "default": "https://feed.piral.cloud/api/v1/pilet/empty",
       "type": "string"
+    },
+    "agents": {
+      "description": "Generate an AGENTS.md rules file for AI assistants.",
+      "default": true,
+      "type": "boolean"
     }
   },
   "author": "smapiot",
